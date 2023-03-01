@@ -7,11 +7,9 @@ import Accomodation from '../../components/accom-component';
 function MainPage({countsOffers} : MainPageProps ): JSX.Element {
   return (
     <div>
-
       <body>
         <div style={{display: 'none'}} >
         </div>
-
         <div className="page page--gray page--main">
           <header className="header">
             <div className="container">
@@ -41,7 +39,6 @@ function MainPage({countsOffers} : MainPageProps ): JSX.Element {
               </div>
             </div>
           </header>
-
           <main className="page__main page__main--index">
             <h1 className="visually-hidden">Cities</h1>
             <div className="tabs">
