@@ -1,6 +1,4 @@
-
-
-function AccomComponent (): JSX.Element {
+function Accomodation (): JSX.Element {
   return (
     <div>
       <article className="cities__card place-card">
@@ -39,4 +37,4 @@ function AccomComponent (): JSX.Element {
 }
 
 
-export default AccomComponent;
+export default Accomodation;

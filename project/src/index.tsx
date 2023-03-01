@@ -4,7 +4,6 @@ import App from './components/app/app';
 
 const Settings = {
   countOffers: 8888
-
 } as const;
 
 const root = ReactDOM.createRoot(
