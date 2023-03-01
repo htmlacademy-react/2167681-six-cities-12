@@ -1,8 +1,7 @@
-import AccomComponent from '../../components/accom-component';
+import Accomodation from '../../components/accom-component';
 
  type MainPageProps = {
 	countsOffers: number;
-
 }
 
 function MainPage({countsOffers} : MainPageProps ): JSX.Element {
@@ -100,12 +99,12 @@ function MainPage({countsOffers} : MainPageProps ): JSX.Element {
                   </form>
                   <div className="cities__places-list places__list tabs__content">
                     {/* Блок для карточек с недвижимостью */}
-                    <AccomComponent />
-                    <AccomComponent />
-                    <AccomComponent />
-                    <AccomComponent />
-                    <AccomComponent />
-                    <AccomComponent />
+                    <Accomodation />
+                    <Accomodation />
+                    <Accomodation />
+                    <Accomodation />
+                    <Accomodation />
+                    <Accomodation />
                   </div>
                 </section>
                 <div className="cities__right-section">

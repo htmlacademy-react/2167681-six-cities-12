@@ -2,10 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 
-
 const Settings = {
   countOffers: 11111
-
 } as const;
 
 const root = ReactDOM.createRoot(
