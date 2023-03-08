@@ -1,10 +1,11 @@
-import Offer from './Offer';
+/* import Offer from './Offer'; */
 
 type MainPageProps = {
 	countsOffers: number;
+	/* offers: string[]; */
 }
 
-function FoundOffers ({countsOffers} : MainPageProps ): JSX.Element {
+function FoundOffers ({countsOffers, /* offers */} : MainPageProps ): JSX.Element {
   if (countsOffers > 0) {
     return (
       <div className="cities">
@@ -26,12 +27,8 @@ function FoundOffers ({countsOffers} : MainPageProps ): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {/* Блок для карточек с недвижимостью */}
-              <Offer />
-              <Offer />
-              <Offer />
-              <Offer />
-              <Offer />
-              <Offer />
+              {/* {offers.map((el) => <Offer offerProps={el} />)} */}
+
             </div>
           </section>
           <div className="cities__right-section">

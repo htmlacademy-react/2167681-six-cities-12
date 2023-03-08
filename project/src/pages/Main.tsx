@@ -4,9 +4,10 @@ import {} from 'react-router-dom';
 
  type MainPageProps = {
 	countsOffers: number;
+/* 	offers: string[]; */
 }
 
-function MainPage({countsOffers} : MainPageProps ): JSX.Element {
+function MainPage({countsOffers,} : MainPageProps ): JSX.Element {
   return (
     <div className="page page--gray page--main">
       <main className="page__main page__main--index">
@@ -24,7 +25,7 @@ function MainPage({countsOffers} : MainPageProps ): JSX.Element {
           </section>
         </div>
         {/* Отображение предложений.*/}
-        <FoundOffers countsOffers={countsOffers}/>
+        <FoundOffers countsOffers={countsOffers}/*  offers={offers}  *//>
       </main>
     </div>
   );

@@ -1,4 +1,16 @@
-function Offer (): JSX.Element {
+
+type offerProps = {
+	city: string;
+	photo: string;
+	title: string;
+	typeOffer: string;
+	description: string;
+	countBedRoom: string;
+	priceForNight: string;
+	countGuests: string;
+}
+
+function Offer (offerProps : offerProps): JSX.Element {
   return (
     <div>
       <article className="cities__card  place-card">{/* favorites__card класс - если вставлять в Favorites */}

@@ -11,12 +11,24 @@ import { AppRoutes } from '../../utils/consts';
 	isAuth: boolean;
 };
 
-function App( {countOffers, isAuth} : AppScreenProps ): JSX.Element {
+type offerProps = {
+	city: string;
+	photo: string;
+	title: string;
+	typeOffer: string;
+	description: string;
+	countBedRoom: string;
+	priceForNight: string;
+	countGuests: string;
+}
+
+function App( {countOffers, isAuth} : AppScreenProps, offers : offerProps, favoritesOffers :
+	offerProps): JSX.Element {
   return(
     <BrowserRouter>
       <Routes>
         <Route path={AppRoutes.Main } element={<Header isAuth={isAuth}/>}>
-          <Route index element={<MainPage countsOffers={countOffers}/>} />
+          <Route index element={<MainPage countsOffers={countOffers}/*  offers={offers} *//>} />
           <Route path={AppRoutes.Login} element={<Login />}/>
           <Route path='/*' element={<NotFound />}/>
           <Route path={AppRoutes.Favorites} element={isAuth ? <Favorites /> : <Navigate to={AppRoutes.Login} />}/>
