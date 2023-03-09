@@ -1,9 +1,13 @@
 import Footer from '../components/Footer';
 import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
+import { Helmet } from 'react-helmet-async';
 
 function Favorites (): JSX.Element {
   return (
     <div>
+      <Helmet>
+        <title>Твои любимые места</title>
+      </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
           <section className="favorites">

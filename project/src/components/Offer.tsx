@@ -1,28 +1,24 @@
 
 type offerProps = {
-	city: string;
 	photo: string;
 	title: string;
 	typeOffer: string;
-	description: string;
-	countBedRoom: string;
 	priceForNight: string;
-	countGuests: string;
 }
 
-function Offer (offerProps : offerProps): JSX.Element {
+function Offer ({photo, title, typeOffer, priceForNight} : offerProps): JSX.Element {
   return (
     <div>
       <article className="cities__card  place-card">{/* favorites__card класс - если вставлять в Favorites */}
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
-            <img className="place-card__image" src="img/room.jpg" width="260" height="200" alt="Place image" />
+            <img className="place-card__image" src={photo} width="260" height="200" alt="Place image" />
           </a>
         </div>
         <div className="place-card__info">
           <div className="place-card__price-wrapper">
             <div className="place-card__price">
-              <b className="place-card__price-value">&euro;80</b>
+              <b className="place-card__price-value">&euro;{priceForNight}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
             <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
@@ -39,9 +35,9 @@ function Offer (offerProps : offerProps): JSX.Element {
             </div>
           </div>
           <h2 className="place-card__name">
-            <a href="#">Wood and stone place</a>
+            <a href="#">{title}</a>
           </h2>
-          <p className="place-card__type">Private room</p>
+          <p className="place-card__type">{typeOffer}</p>
         </div>
       </article>
     </div>

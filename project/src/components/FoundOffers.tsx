@@ -1,11 +1,26 @@
-/* import Offer from './Offer'; */
+/* eslint-disable react/jsx-closing-bracket-location */
+/* eslint-disable no-mixed-spaces-and-tabs */
 
-type MainPageProps = {
-	countsOffers: number;
-	/* offers: string[]; */
+import Offer from './Offer';
+
+type offerProps = {
+	id: string;
+	city: string;
+	photo: string;
+	title: string;
+	typeOffer: string;
+	description: string;
+	countBedRoom: string;
+	priceForNight: string;
+	countGuests: string;
 }
 
-function FoundOffers ({countsOffers, /* offers */} : MainPageProps ): JSX.Element {
+type FoundOffersProps = {
+	countsOffers: number;
+	offers: offerProps[];
+}
+
+function FoundOffers ({countsOffers, offers} : FoundOffersProps ): JSX.Element {
   if (countsOffers > 0) {
     return (
       <div className="cities">
@@ -16,7 +31,7 @@ function FoundOffers ({countsOffers, /* offers */} : MainPageProps ): JSX.Elemen
             <form className="places__sorting" action="#" method="get">
               <span className="places__sorting-caption">Sort by</span>
               <span className="places__sorting-type" tabIndex={0}>
-			Popular
+						Popular
               </span>
               <ul className="places__options places__options--custom places__options--opened">
                 <li className="places__option places__option--active" tabIndex={0}>Popular</li>
@@ -27,13 +42,14 @@ function FoundOffers ({countsOffers, /* offers */} : MainPageProps ): JSX.Elemen
             </form>
             <div className="cities__places-list places__list tabs__content">
               {/* Блок для карточек с недвижимостью */}
-              {/* {offers.map((el) => <Offer offerProps={el} />)} */}
-
+              {offers.map((el) => (<Offer key={el.id} photo={el.photo} title={el.title}
+                typeOffer={el.typeOffer} priceForNight={el.priceForNight}/>
+					 ))}
             </div>
           </section>
-          <div className="cities__right-section">
-            <section className="cities__map map"></section>
-          </div>
+          	<div className="cities__right-section">
+           	 <section className="cities__map map"></section>
+          	</div>
         </div>
       </div>);
   } else {
