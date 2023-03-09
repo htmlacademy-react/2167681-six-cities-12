@@ -1,17 +1,17 @@
+/* eslint-disable react/jsx-closing-bracket-location */
 import MainPage from '../../pages/Main';
 import Favorites from '../../pages/Favorites';
 import Header from '../Header';
+import PrivateRoute from '../private-route';
 import Login from '../../pages/Login';
-import {BrowserRouter, Routes, Route, Navigate} from 'react-router-dom';
+import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';
-import { AppRoutes } from '../../utils/consts';
+import { AppRoute, AuthorizationStatus } from '../../utils/consts';
+import { HelmetProvider } from 'react-helmet-async';
 
- type AppScreenProps = {
-	countOffers: number;
-	isAuth: boolean;
-};
 
 type offerProps = {
+	id: string;
 	city: string;
 	photo: string;
 	title: string;
@@ -22,19 +22,36 @@ type offerProps = {
 	countGuests: string;
 }
 
-function App( {countOffers, isAuth} : AppScreenProps, offers : offerProps, favoritesOffers :
-	offerProps): JSX.Element {
-  return(
-    <BrowserRouter>
-      <Routes>
-        <Route path={AppRoutes.Main } element={<Header isAuth={isAuth}/>}>
-          <Route index element={<MainPage countsOffers={countOffers}/*  offers={offers} *//>} />
-          <Route path={AppRoutes.Login} element={<Login />}/>
-          <Route path='/*' element={<NotFound />}/>
-          <Route path={AppRoutes.Favorites} element={isAuth ? <Favorites /> : <Navigate to={AppRoutes.Login} />}/>
-        </Route>
-      </Routes>
-    </BrowserRouter>
+type AppScreenProps = {
+	countOffers: number;
+	isAuth: boolean;
+	offers: offerProps[];
+	cityCatalog: string[];
+};
+
+
+function App({ countOffers, isAuth, offers, cityCatalog }: AppScreenProps): JSX.Element {
+  return (
+    <HelmetProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path={AppRoute.Main} element={<Header isAuth={isAuth} />}>
+            <Route index element={<MainPage countsOffers={countOffers} offers={offers}
+              cityCatalog={cityCatalog} />}
+            />
+            <Route path={AppRoute.Login} element={<Login />} />
+            <Route path='/*' element={<NotFound />} />
+
+            <Route path={AppRoute.Favorites} element={
+              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
+                <Favorites />
+              </PrivateRoute>
+            } />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </HelmetProvider>
+
   );
 }
 

@@ -1,15 +1,22 @@
-import {TYPE_OFFER, COUNT_BEDROOM, COUNT_GUESTS, PRICE_FOR_NIGHT, PHOTO,
-  TITLE, DESCRIPTION} from '../mocks/data';
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { nanoid } from 'nanoid';
+
+import {
+  TYPE_OFFER, COUNT_BEDROOM, COUNT_GUESTS, PRICE_FOR_NIGHT, PHOTO,
+  TITLE, DESCRIPTION, CITY
+} from '../mocks/data';
+
 
 type protoMock = {
-	city:string;
-    photo: string;
-    title: string;
-    typeOffer: string;
-    description: string;
-    countBedRoom: string;
-    priceForNight: string;
-    countGuests: string;
+	id: string;
+	photo: string;
+	city: string;
+	title: string;
+	typeOffer: string;
+	description: string;
+	countBedRoom: string;
+	priceForNight: string;
+	countGuests: string;
 }
 
 
@@ -19,9 +26,10 @@ function getRandomIntInclusiveArrayElement(array: string[]): string {
 }
 
 
-function renderMock (): protoMock {
+function renderMock(): protoMock {
   return {
-    city:getRandomIntInclusiveArrayElement(PHOTO),
+    id: nanoid(),
+    city: getRandomIntInclusiveArrayElement(CITY),
     photo: getRandomIntInclusiveArrayElement(PHOTO),
     title: getRandomIntInclusiveArrayElement(TITLE),
     typeOffer: getRandomIntInclusiveArrayElement(TYPE_OFFER),
@@ -32,12 +40,14 @@ function renderMock (): protoMock {
   };
 }
 
-function renderArrayMocks (count : number) {
-  const arrayMocks = [];
+function renderArrayMocks(count: number) {
+  const arrayMocks: protoMock[] = [];
 
-  for(let i = 0; i < count; i++) {
+  for (let i = 0; i < count; i++) {
     arrayMocks.push(renderMock());
   }
+
+  return arrayMocks;
 }
 
 
