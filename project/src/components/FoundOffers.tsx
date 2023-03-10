@@ -42,8 +42,7 @@ function FoundOffers ({countsOffers, offers} : FoundOffersProps ): JSX.Element {
             </form>
             <div className="cities__places-list places__list tabs__content">
               {/* Блок для карточек с недвижимостью */}
-              {offers.map((el) => (<Offer key={el.id} photo={el.photo} title={el.title}
-                typeOffer={el.typeOffer} priceForNight={el.priceForNight}/>
+              {offers.map((el) => (<Offer key={el.id} {...el}/>
 					 ))}
             </div>
           </section>
