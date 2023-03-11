@@ -18,6 +18,7 @@ export enum AuthorizationStatus {
 	Unknown = 'UNKNOWN',
 }
 
+//Города находятся на панели навигации
 export const City: string[] = [
   'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels'
 ];

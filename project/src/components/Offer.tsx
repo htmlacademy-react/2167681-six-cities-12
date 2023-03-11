@@ -1,15 +1,16 @@
+/* eslint-disable no-mixed-spaces-and-tabs */
+import { protoOffer } from '../utils/types';
 
-type offerProps = {
-	photo: string;
-	title: string;
-	typeOffer: string;
-	priceForNight: string;
-}
 
-function Offer ({photo, title, typeOffer, priceForNight} : offerProps): JSX.Element {
+function Offer ({photo, title, typeOffer, priceForNight, isPremium, isFavorite} : protoOffer): JSX.Element {
   return (
     <div>
-      <article className="cities__card  place-card">{/* favorites__card класс - если вставлять в Favorites */}
+      <article className="cities__card   place-card">{/* favorites__card класс - если вставлять в Favorites */}
+        { isPremium &&
+		<div className="place-card__mark">
+		  <span>Premium</span>
+		</div>}
+
         <div className="cities__image-wrapper place-card__image-wrapper">
           <a href="#">
             <img className="place-card__image" src={photo} width="260" height="200" alt="Place image" />
@@ -21,7 +22,7 @@ function Offer ({photo, title, typeOffer, priceForNight} : offerProps): JSX.Elem
               <b className="place-card__price-value">&euro;{priceForNight}</b>
               <span className="place-card__price-text">&#47;&nbsp;night</span>
             </div>
-            <button className="place-card__bookmark-button place-card__bookmark-button--active button" type="button">
+            <button className={`place-card__bookmark-button ${isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
               <svg className="place-card__bookmark-icon" width="18" height="19">
                 <use xlinkHref="#icon-bookmark"></use>
               </svg>
