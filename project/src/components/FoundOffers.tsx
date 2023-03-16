@@ -2,13 +2,14 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { protoOffer } from '../utils/types';
 import Offer from './Offer';
+import { ActivePage } from '../utils/consts';
 
 type FoundOffersProps = {
-
 	offers: protoOffer[];
+	typePage: ActivePage;
 }
 
-function FoundOffers({ offers }: FoundOffersProps): JSX.Element {
+function FoundOffers({ offers, typePage}: FoundOffersProps): JSX.Element {
   return (
     <div className="cities">
       <div className={`cities__places-container ${offers.length === 0 ? 'cities__places-container--empty' : ''} container`}>
@@ -37,7 +38,7 @@ function FoundOffers({ offers }: FoundOffersProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {/* Блок для карточек с недвижимостью */}
-                {offers.map((el) => (<Offer key={el.id} {...el} />
+                {offers.map((el) => (<Offer key={el.id} offer={el} typePage={typePage} />
                 ))}
               </div>
             </>}
