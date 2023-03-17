@@ -1,3 +1,6 @@
+export const MAX_PERCENT_STARS_WIDTH = 100;
+export const STARS_COUNT = 5;
+
 export enum AppRoute {
 	Main = '/',
 	Login = '/login',
@@ -11,7 +14,6 @@ export enum OfferPhotoSize {
 	CommonWidth = 260,
 	CommonHeight = 200,
 }
-
 
 export enum Counter {
 	Offers = 4,

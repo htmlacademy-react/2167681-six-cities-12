@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { protoOffer } from '../utils/types';
-import { ActivePage, AppRoute, OfferPhotoSize } from '../utils/consts';
+import { ActivePage, AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT } from '../utils/consts';
 import { Link } from 'react-router-dom';
 
 type offerProps = {
@@ -38,7 +38,11 @@ function Offer({ offer, typePage }: offerProps): JSX.Element {
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">
-            <span style={{ width: '80%' }}></span>
+            <span style={{
+              width: `${MAX_PERCENT_STARS_WIDTH * offer.rating / STARS_COUNT}%`
+            }}
+            >
+            </span>
             <span className="visually-hidden">Rating</span>
           </div>
         </div>
