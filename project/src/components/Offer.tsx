@@ -1,6 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { protoOffer } from '../utils/types';
-import { ActivePage } from '../utils/consts';
+import { ActivePage, AppRoute, OfferPhotoSize } from '../utils/consts';
+import { Link } from 'react-router-dom';
 
 type offerProps = {
 	typePage: ActivePage;
@@ -10,14 +11,16 @@ type offerProps = {
 function Offer({ offer, typePage }: offerProps): JSX.Element {
 
   return (
-    <article className={`${typePage === ActivePage.Main ? 'cities__card' : 'favorites__card'} place-card`}>{/*  класс - если вставлять в Favorites */}
+    <article className={`${typePage === ActivePage.Main ? 'cities__card' : 'favorites__card'} place-card`}>
       {offer.isPremium &&
 				<div className="place-card__mark">
 				  <span>Premium</span>
 				</div>}
       <div className={`${typePage === ActivePage.Main ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={offer.photo} width={typePage === ActivePage.Main ? 260 : 150} height={typePage === ActivePage.Main ? 200 : 110} alt="Place image" />
+          <img className="place-card__image" src={offer.photo} width={typePage === ActivePage.Main ? OfferPhotoSize.CommonWidth : OfferPhotoSize.FavoritesWidth}
+			 height={typePage === ActivePage.Main ? OfferPhotoSize.CommonHeight : OfferPhotoSize.FavoritesWidth} alt="Place image"
+          />
         </a>
       </div>
       <div className={`${typePage === ActivePage.Main ? '' : 'favorites__card-info'} place-card__info`}>
@@ -40,7 +43,7 @@ function Offer({ offer, typePage }: offerProps): JSX.Element {
           </div>
         </div>
         <h2 className="place-card__name">
-          <a href="#">{offer.title}</a>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.typeOffer}</p>
       </div>

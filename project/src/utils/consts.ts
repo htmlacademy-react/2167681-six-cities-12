@@ -5,6 +5,13 @@ export enum AppRoute {
 	Offer = '/offers/:id'
 }
 
+export enum OfferPhotoSize {
+	FavoritesWidth = 150,
+	FavoritesHeight = 110,
+	CommonWidth = 260,
+	CommonHeight = 200,
+}
+
 
 export enum Counter {
 	Offers = 4,

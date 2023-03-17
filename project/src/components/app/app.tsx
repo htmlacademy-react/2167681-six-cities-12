@@ -9,6 +9,7 @@ import NotFound from '../NotFound';
 import { AppRoute, AuthorizationStatus, ActivePage } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
 import { protoOffer } from '../../utils/types';
+import OfferId from '../../pages/OfferId';
 
 type AppScreenProps = {
 	isAuth: boolean;
@@ -27,13 +28,15 @@ function App({ isAuth, offers, cityCatalog}: AppScreenProps): JSX.Element {
               cityCatalog={cityCatalog} typePage={ActivePage.Main} />}
             />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path='/*' element={<NotFound />} />
 
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
                 <Favorites typePage={ActivePage.Favorites} offers={offers}/>
               </PrivateRoute>
             } />
+
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferId />}/>
+            <Route path='/*' element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
