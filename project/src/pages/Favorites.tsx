@@ -18,7 +18,7 @@ function Favorites ({typePage, offers} : FvoritesProps): JSX.Element {
   const currentLocation = [...preCurrentLocation];
 
   return (
-    <div>
+    <>
       <Helmet>
         <title>Твои любимые места</title>
       </Helmet>
@@ -50,7 +50,7 @@ function Favorites ({typePage, offers} : FvoritesProps): JSX.Element {
         </div>
       </main>
       <Footer />
-    </div>
+    </>
   );
 }
 
