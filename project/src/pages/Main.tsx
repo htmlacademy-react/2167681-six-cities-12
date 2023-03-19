@@ -1,27 +1,16 @@
 import FoundOffers from '../components/FoundOffers';
 import LocationItem from '../components/LocationItem';
 import { Helmet } from 'react-helmet-async';
-
-
-type offerProps = {
-	id: string;
-	city: string;
-	photo: string;
-	title: string;
-	typeOffer: string;
-	description: string;
-	countBedRoom: string;
-	priceForNight: string;
-	countGuests: string;
-}
+import { protoOffer } from '../utils/types';
+import { ActivePage } from '../utils/consts';
 
  type MainPageProps = {
-	countsOffers: number;
-   offers: offerProps[];
+   offers: protoOffer[];
 	cityCatalog: string[];
+	typePage: ActivePage;
 }
 
-function MainPage({countsOffers, offers, cityCatalog} : MainPageProps ): JSX.Element {
+function MainPage({offers, cityCatalog, typePage} : MainPageProps ): JSX.Element {
   return (
     <div className="page page--gray page--main">
 
@@ -34,13 +23,12 @@ function MainPage({countsOffers, offers, cityCatalog} : MainPageProps ): JSX.Ele
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {/* <LocationItem city={offers}/> */}
               {cityCatalog.map((el) => <LocationItem key={el} city={el}/>)}
             </ul>
           </section>
         </div>
         {/* Отображение предложений.*/}
-        <FoundOffers countsOffers={countsOffers} offers={offers}/>
+        <FoundOffers offers={offers} typePage={typePage}/>
       </main>
     </div>
   );

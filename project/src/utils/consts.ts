@@ -1,3 +1,6 @@
+export const MAX_PERCENT_STARS_WIDTH = 100;
+export const STARS_COUNT = 5;
+
 export enum AppRoute {
 	Main = '/',
 	Login = '/login',
@@ -5,11 +8,15 @@ export enum AppRoute {
 	Offer = '/offers/:id'
 }
 
+export enum OfferPhotoSize {
+	FavoritesWidth = 150,
+	FavoritesHeight = 110,
+	CommonWidth = 260,
+	CommonHeight = 200,
+}
 
 export enum Counter {
-	Count_offers = 8888,
 	Offers = 4,
-	Favorites_offers = 2,
 }
 
 export enum AuthorizationStatus {
@@ -18,6 +25,28 @@ export enum AuthorizationStatus {
 	Unknown = 'UNKNOWN',
 }
 
-export const City: string[] = [
-  'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels'
+export enum ActivePage {
+	Favorites = 'favorites',
+	Main = 'main'
+}
+
+//Города находятся на панели навигации
+export const CatalogCity: string[] = [
+  'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels',
 ];
+
+
+export enum CurrentOfferKey {
+	Id = 'id',
+	Photo = 'photo',
+	City = 'city',
+	Title = 'title',
+	TypeOffer = 'typeOffer',
+	Description = 'description',
+	CountBedRoom = 'countBedRoom',
+	PriceForNight = 'priceForNight',
+	CountGuests = 'countGuests',
+	IsFavorite = 'isFavorite',
+	IsPremium = 'isPremium',
+	Rating = 'rating',
+}

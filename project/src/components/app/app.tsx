@@ -6,47 +6,37 @@ import PrivateRoute from '../private-route';
 import Login from '../../pages/Login';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';
-import { AppRoute, AuthorizationStatus } from '../../utils/consts';
+import { AppRoute, AuthorizationStatus, ActivePage } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
-
-
-type offerProps = {
-	id: string;
-	city: string;
-	photo: string;
-	title: string;
-	typeOffer: string;
-	description: string;
-	countBedRoom: string;
-	priceForNight: string;
-	countGuests: string;
-}
+import { protoOffer } from '../../utils/types';
+import OfferId from '../../pages/OfferId';
 
 type AppScreenProps = {
-	countOffers: number;
 	isAuth: boolean;
-	offers: offerProps[];
+	offers: protoOffer[];
 	cityCatalog: string[];
 };
 
 
-function App({ countOffers, isAuth, offers, cityCatalog }: AppScreenProps): JSX.Element {
+function App({ isAuth, offers, cityCatalog}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Header isAuth={isAuth} />}>
-            <Route index element={<MainPage countsOffers={countOffers} offers={offers}
-              cityCatalog={cityCatalog} />}
+            <Route index element={<MainPage offers={offers}
+              cityCatalog={cityCatalog} typePage={ActivePage.Main} />}
             />
             <Route path={AppRoute.Login} element={<Login />} />
-            <Route path='/*' element={<NotFound />} />
 
             <Route path={AppRoute.Favorites} element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.NoAuth}>
-                <Favorites />
+              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+                <Favorites typePage={ActivePage.Favorites} offers={offers}/>
               </PrivateRoute>
             } />
+
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferId />}/>
+            <Route path='/*' element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
