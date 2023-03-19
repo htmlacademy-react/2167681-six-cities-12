@@ -13,7 +13,7 @@ function FoundOffers({ offers, typePage}: FoundOffersProps): JSX.Element {
   return (
     <div className="cities">
       <div className={`cities__places-container ${offers.length === 0 ? 'cities__places-container--empty' : ''} container`}>
-        <section className={offers.length === 0 ? 'cities__no-places' : 'cities__places places'}>
+        <section className={`${offers.length === 0 ? 'cities__no-places' : 'cities__places '} places`}>
           {/* пустой контейнер */}
           {offers.length === 0 ?
             <div className="cities__status-wrapper tabs__content">

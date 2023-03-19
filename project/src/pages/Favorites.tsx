@@ -13,9 +13,8 @@ type FvoritesProps = {
 function Favorites ({typePage, offers} : FvoritesProps): JSX.Element {
 
   const favoriteOffers = filterOffers(offers, CurrentOfferKey.IsFavorite, true);
-  const offerLocation = favoriteOffers.map((el) => el.city);
-  const preCurrentLocation = new Set<string>(offerLocation);
-  const currentLocation = [...preCurrentLocation];
+  const offerLocation: string[] = favoriteOffers.map((el) => el.city);
+  const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));
 
   return (
     <>
