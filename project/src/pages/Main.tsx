@@ -1,16 +1,17 @@
 import FoundOffers from '../components/FoundOffers';
 import LocationItem from '../components/LocationItem';
 import { Helmet } from 'react-helmet-async';
-import { protoOffer } from '../utils/types';
+import { protoOffer, City } from '../types/types';
 import { ActivePage } from '../utils/consts';
 
  type MainPageProps = {
    offers: protoOffer[];
 	cityCatalog: string[];
 	typePage: ActivePage;
+	city: City;
 }
 
-function MainPage({offers, cityCatalog, typePage} : MainPageProps ): JSX.Element {
+function MainPage({offers, cityCatalog, typePage, city} : MainPageProps ): JSX.Element {
   return (
     <div className="page page--gray page--main">
 
@@ -28,7 +29,7 @@ function MainPage({offers, cityCatalog, typePage} : MainPageProps ): JSX.Element
           </section>
         </div>
         {/* Отображение предложений.*/}
-        <FoundOffers offers={offers} typePage={typePage}/>
+        <FoundOffers offers={offers} typePage={typePage} city={city}/>
       </main>
     </div>
   );

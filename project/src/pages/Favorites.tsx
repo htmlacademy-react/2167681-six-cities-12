@@ -2,7 +2,7 @@ import Footer from '../components/Footer';
 import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { Helmet } from 'react-helmet-async';
 import { ActivePage, CurrentOfferKey } from '../utils/consts';
-import { protoOffer } from '../utils/types';
+import { protoOffer } from '../types/types';
 import {filterOffers} from '../utils/util';
 
 type FvoritesProps = {

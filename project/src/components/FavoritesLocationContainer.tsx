@@ -1,5 +1,5 @@
 import Offer from './Offer';
-import { protoOffer } from '../utils/types';
+import { protoOffer } from '../types/types';
 import { ActivePage } from '../utils/consts';
 
 type LocationContainerProps = {

@@ -8,24 +8,25 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';
 import { AppRoute, AuthorizationStatus, ActivePage } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
-import { protoOffer } from '../../utils/types';
+import { protoOffer, City } from '../../types/types';
 import OfferId from '../../pages/OfferId';
 
 type AppScreenProps = {
 	isAuth: boolean;
 	offers: protoOffer[];
 	cityCatalog: string[];
+	city: City;
 };
 
 
-function App({ isAuth, offers, cityCatalog}: AppScreenProps): JSX.Element {
+function App({ isAuth, offers, cityCatalog, city}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
           <Route path={AppRoute.Main} element={<Header isAuth={isAuth} />}>
             <Route index element={<MainPage offers={offers}
-              cityCatalog={cityCatalog} typePage={ActivePage.Main} />}
+              cityCatalog={cityCatalog} typePage={ActivePage.Main} city={city} />}
             />
             <Route path={AppRoute.Login} element={<Login />} />
 

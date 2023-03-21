@@ -1,10 +1,10 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { nanoid } from 'nanoid';
-import { protoOffer } from '../utils/types';
+import { protoOffer } from '../types/types';
 
 import {
   TYPE_OFFER, COUNT_BEDROOM, COUNT_GUESTS, PRICE_FOR_NIGHT, PHOTO,
-  TITLE, DESCRIPTION, CITY, BOOLEAN, RATING
+  TITLE, DESCRIPTION, CITY, BOOLEAN, RATING, LATITUDE, LONGITUDE, MAP_ZOOM
 } from '../mocks/data';
 
 
@@ -14,7 +14,7 @@ function getRandomIntInclusiveArrayElement<T>(array: T[]): T {
 }
 
 
-function renderMock(): protoOffer {
+function renderMock(i: number): protoOffer {
   return {
     id: nanoid(),
     city: getRandomIntInclusiveArrayElement(CITY),
@@ -28,6 +28,11 @@ function renderMock(): protoOffer {
 	 isFavorite: getRandomIntInclusiveArrayElement(BOOLEAN),
 	 isPremium: getRandomIntInclusiveArrayElement(BOOLEAN),
 	 rating: getRandomIntInclusiveArrayElement(RATING),
+	 coordinates: {
+      latitude: LATITUDE[i],
+      longitude: LONGITUDE[i],
+      zoom: MAP_ZOOM
+	 }
   };
 }
 
@@ -35,7 +40,7 @@ function renderArrayMocks(count: number):protoOffer[] {
   const arrayMocks: protoOffer[] = [];
 
   for (let i = 0; i < count; i++) {
-    arrayMocks.push(renderMock());
+    arrayMocks.push(renderMock(i));
   }
 
   return arrayMocks;

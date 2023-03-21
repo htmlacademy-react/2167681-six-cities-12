@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
 import { Counter, CatalogCity } from './utils/consts';
 import { renderArrayMocks } from './mocks/render';
+import {city} from './mocks/city';
 
 const Settings = {
   isAuth: false,
   cityCatalog: CatalogCity,
+  city: city
 } as const;
 
 const OfferDataSet = {
@@ -21,7 +23,7 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <App isAuth={Settings.isAuth} offers={OfferDataSet.offers}
-      cityCatalog={CatalogCity}
+      cityCatalog={CatalogCity} city={city}
     />
   </React.StrictMode>,
 );

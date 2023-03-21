@@ -1,5 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { protoOffer } from '../utils/types';
+import { protoOffer } from '../types/types';
 import { ActivePage, AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT } from '../utils/consts';
 import { Link } from 'react-router-dom';
 
