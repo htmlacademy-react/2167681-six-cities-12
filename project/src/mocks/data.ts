@@ -13,6 +13,22 @@ export const BOOLEAN: boolean[] = [
   true, false
 ];
 
+export const LATITUDE: number[] = [
+  52.3909553943508,
+  52.3609553943508,
+  52.3909553943508,
+  52.3809553943508
+];
+
+export const LONGITUDE: number[] = [
+  4.85309666406198,
+  4.85309666406198,
+  4.929309666406198,
+  4.939309666406198,
+];
+
+export const MAP_ZOOM = 1;
+
 export const TITLE: string[] = [
   'Stylish apartments in the city center',
   'The best offer for a large family',

@@ -1,15 +1,17 @@
 /* eslint-disable react/jsx-closing-bracket-location */
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { protoOffer } from '../utils/types';
+import { protoOffer, City} from '../types/types';
 import Offer from './Offer';
 import { ActivePage } from '../utils/consts';
+import Map from './Map';
 
 type FoundOffersProps = {
 	offers: protoOffer[];
 	typePage: ActivePage;
+	city: City;
 }
 
-function FoundOffers({ offers, typePage}: FoundOffersProps): JSX.Element {
+function FoundOffers({ offers, typePage, city}: FoundOffersProps): JSX.Element {
   return (
     <div className="cities">
       <div className={`cities__places-container ${offers.length === 0 ? 'cities__places-container--empty' : ''} container`}>
@@ -49,7 +51,7 @@ function FoundOffers({ offers, typePage}: FoundOffersProps): JSX.Element {
 			 /* заставка пустого экрана */
             <img className="no-places" src="img/no-places.png" alt="" /> :
           /* карта города */
-            <section className="cities__map map"></section>}
+            <Map city={city} coordinates={offers.map((el) => el.coordinates )}/>}
         </div>
       </div>
     </div>);

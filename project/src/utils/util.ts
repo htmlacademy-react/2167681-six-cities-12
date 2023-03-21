@@ -1,4 +1,4 @@
-import { protoOffer } from './types';
+import { protoOffer } from '../types/types';
 import {CurrentOfferKey} from './consts';
 
 
