@@ -1,15 +1,14 @@
 import Offer from './Offer';
 import { protoOffer } from '../types/types';
-import { ActivePage } from '../utils/consts';
+import { OfferCardClassName, } from '../utils/consts';
 
 type LocationContainerProps = {
 	offers: protoOffer[];
 	city: string;
-	typePage: ActivePage;
 }
 
 // данный компонент группирует избранные предложения по городам
-function FavoritesLocationContainer ({offers, city, typePage}: LocationContainerProps): JSX.Element {
+function FavoritesLocationContainer ({offers, city}: LocationContainerProps): JSX.Element {
   return (
     <li className="favorites__locations-items">
       <div className="favorites__locations locations locations--current">
@@ -22,7 +21,7 @@ function FavoritesLocationContainer ({offers, city, typePage}: LocationContainer
       <div className="favorites__places">
         {/* Избранные предложения */}
         {
-          offers.map((el) => (<Offer key={el.id} offer={el} typePage={typePage}/>))
+          offers.map((el) => (<Offer key={el.id} offer={el} place={OfferCardClassName.favorites}/>))
         }
       </div>
     </li>

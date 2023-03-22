@@ -12,6 +12,7 @@ export type protoOffer = {
 	isFavorite: boolean;
 	isPremium: boolean;
 	rating: number;
+	reviews: Review[];
 	coordinates: Сoordinates;
 };
 
@@ -34,3 +35,11 @@ export type Сoordinates = {
 	zoom: number;
  };
 
+export type Review = {
+	id: number;
+	avatar: string;
+	name: string;
+	rating: number;
+	date: Date;
+	discription: string;
+}

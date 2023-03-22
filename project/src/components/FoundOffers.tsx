@@ -2,7 +2,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { protoOffer, City} from '../types/types';
 import Offer from './Offer';
-import { ActivePage } from '../utils/consts';
+import { ActivePage, MapClassName, OfferCardClassName } from '../utils/consts';
 import Map from './Map';
 
 type FoundOffersProps = {
@@ -40,7 +40,7 @@ function FoundOffers({ offers, typePage, city}: FoundOffersProps): JSX.Element {
               </form>
               <div className="cities__places-list places__list tabs__content">
                 {/* Блок для карточек с недвижимостью */}
-                {offers.map((el) => (<Offer key={el.id} offer={el} typePage={typePage} />
+                {offers.map((el) => (<Offer key={el.id} offer={el} place={OfferCardClassName.main}/>
                 ))}
               </div>
             </>}
@@ -51,7 +51,7 @@ function FoundOffers({ offers, typePage, city}: FoundOffersProps): JSX.Element {
 			 /* заставка пустого экрана */
             <img className="no-places" src="img/no-places.png" alt="" /> :
           /* карта города */
-            <Map city={city} coordinates={offers.map((el) => el.coordinates )}/>}
+            <Map city={city} coordinates={offers.map((el) => el.coordinates )} className={MapClassName.main}/>}
         </div>
       </div>
     </div>);

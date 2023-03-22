@@ -1,6 +1,17 @@
 export const MAX_PERCENT_STARS_WIDTH = 100;
 export const STARS_COUNT = 5;
 
+export enum MapClassName {
+	offerId = 'property__map',
+	main = 'cities__map'
+}
+
+export enum OfferCardClassName {
+	offerId = 'near-places',
+	main = 'cities',
+	favorites = 'favorites'
+}
+
 export enum AppRoute {
 	Main = '/',
 	Login = '/login',

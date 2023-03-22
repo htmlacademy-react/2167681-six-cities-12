@@ -2,12 +2,13 @@ import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import {Сoordinates, City} from '../types/types';
-import { URL_MARKER_DEFAULT } from '../utils/consts';
+import { URL_MARKER_DEFAULT, MapClassName } from '../utils/consts';
 import useMap from '../hooks/useMap';
 
 type MapProps = {
 	city: City;
 	coordinates: Сoordinates[];
+	className: MapClassName;
 }
 
 const defaultCustomIcon = new Icon({
@@ -16,7 +17,7 @@ const defaultCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map ({city, coordinates}: MapProps): JSX.Element {
+function Map ({city, coordinates, className}: MapProps): JSX.Element {
 
   const mapRef = useRef(null);
   const map = useMap(mapRef, city);
@@ -40,7 +41,7 @@ function Map ({city, coordinates}: MapProps): JSX.Element {
 
 
   return (
-    <section ref={mapRef} className="cities__map map"></section>
+    <section ref={mapRef} className={`${className} map`} ></section>
   );
 }
 
