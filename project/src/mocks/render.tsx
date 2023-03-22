@@ -1,16 +1,29 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { nanoid } from 'nanoid';
-import { protoOffer } from '../types/types';
+import { protoOffer, Review } from '../types/types';
 
 import {
   TYPE_OFFER, COUNT_BEDROOM, COUNT_GUESTS, PRICE_FOR_NIGHT, PHOTO,
-  TITLE, DESCRIPTION, CITY, BOOLEAN, RATING, LATITUDE, LONGITUDE, MAP_ZOOM
+  TITLE, DESCRIPTION, CITY, BOOLEAN, RATING, LATITUDE, LONGITUDE, MAP_ZOOM, AVATAR,
+  NAME,
 } from '../mocks/data';
 
+const COUNT_MOCK_FILES = 4;
 
 function getRandomIntInclusiveArrayElement<T>(array: T[]): T {
   const randomIndex = Math.floor(Math.random() * array.length);
   return array[randomIndex];
+}
+
+function renderReview (i: number): Review {
+  return {
+	 id: i,
+    avatar: getRandomIntInclusiveArrayElement(AVATAR),
+    name: getRandomIntInclusiveArrayElement(NAME),
+    rating: getRandomIntInclusiveArrayElement(RATING),
+    date: new Date(),
+    discription: getRandomIntInclusiveArrayElement(DESCRIPTION)
+  };
 }
 
 
@@ -28,6 +41,7 @@ function renderMock(i: number): protoOffer {
 	 isFavorite: getRandomIntInclusiveArrayElement(BOOLEAN),
 	 isPremium: getRandomIntInclusiveArrayElement(BOOLEAN),
 	 rating: getRandomIntInclusiveArrayElement(RATING),
+    reviews: arrayReviews,
 	 coordinates: {
       latitude: LATITUDE[i],
       longitude: LONGITUDE[i],
@@ -36,17 +50,11 @@ function renderMock(i: number): protoOffer {
   };
 }
 
-function renderArrayMocks(count: number):protoOffer[] {
-  const arrayMocks: protoOffer[] = [];
+const arrayReviews: Review[] = Array.from({length: COUNT_MOCK_FILES}, (_, i) => renderReview(i));
 
-  for (let i = 0; i < count; i++) {
-    arrayMocks.push(renderMock(i));
-  }
-
-  return arrayMocks;
-}
-
+const arrayOffers: protoOffer[] = Array.from({length: COUNT_MOCK_FILES},(_, i) => renderMock(i));
 
 export {
-  renderArrayMocks
+  arrayOffers,
+  arrayReviews
 };

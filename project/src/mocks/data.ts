@@ -1,3 +1,7 @@
+export const NAME: string[] = [
+  'Зина', 'Василиса', 'Николай', 'Виктор'
+];
+
 export const CITY: string[] = [
   'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels'
 ];
@@ -75,7 +79,7 @@ export const RATING: number[] = [
 ];
 
 export const AVATAR: string[] = [
-  'project/public/img/avatar-angelina.jpg',
-  'project/public/img/avatar-max.jpg'
+  'img/avatar-angelina.jpg',
+  'img/avatar-max.jpg'
 ];
 

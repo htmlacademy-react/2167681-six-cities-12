@@ -1,29 +1,29 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import { protoOffer } from '../types/types';
-import { ActivePage, AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT } from '../utils/consts';
+import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
 
 type offerProps = {
-	typePage: ActivePage;
+	place: OfferCardClassName;
 	offer: protoOffer;
 }
 
-function Offer({ offer, typePage }: offerProps): JSX.Element {
+function Offer({ offer, place }: offerProps): JSX.Element {
 
   return (
-    <article className={`${typePage === ActivePage.Main ? 'cities__card' : 'favorites__card'} place-card`}>
+    <article className={`${place}__card place-card`}>
       {offer.isPremium &&
 				<div className="place-card__mark">
 				  <span>Premium</span>
 				</div>}
-      <div className={`${typePage === ActivePage.Main ? 'cities__image-wrapper' : 'favorites__image-wrapper'} place-card__image-wrapper`}>
+      <div className={`${place}__image-wrapper place-card__image-wrapper`}>
         <a href="#">
-          <img className="place-card__image" src={offer.photo} width={typePage === ActivePage.Main ? OfferPhotoSize.CommonWidth : OfferPhotoSize.FavoritesWidth}
-			 height={typePage === ActivePage.Main ? OfferPhotoSize.CommonHeight : OfferPhotoSize.FavoritesWidth} alt="Place image"
+          <img className="place-card__image" src={offer.photo} width={ OfferPhotoSize.CommonWidth}
+			 height={ OfferPhotoSize.CommonHeight} alt="Place image"
           />
         </a>
       </div>
-      <div className={`${typePage === ActivePage.Main ? '' : 'favorites__card-info'} place-card__info`}>
+      <div className={`${place === 'cities' ? '' : 'favorites__card-info'} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
             <b className="place-card__price-value">&euro;{offer.priceForNight}</b>

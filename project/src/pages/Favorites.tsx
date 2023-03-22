@@ -1,16 +1,15 @@
 import Footer from '../components/Footer';
 import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { Helmet } from 'react-helmet-async';
-import { ActivePage, CurrentOfferKey } from '../utils/consts';
+import { CurrentOfferKey } from '../utils/consts';
 import { protoOffer } from '../types/types';
 import {filterOffers} from '../utils/util';
 
 type FvoritesProps = {
-	typePage: ActivePage;
 	offers: protoOffer[];
 }
 
-function Favorites ({typePage, offers} : FvoritesProps): JSX.Element {
+function Favorites ({offers} : FvoritesProps): JSX.Element {
 
   const favoriteOffers = filterOffers(offers, CurrentOfferKey.IsFavorite, true);
   const offerLocation: string[] = favoriteOffers.map((el) => el.city);
@@ -40,7 +39,6 @@ function Favorites ({typePage, offers} : FvoritesProps): JSX.Element {
                     <FavoritesLocationContainer
                       key={el}
                       offers={filterOffers(favoriteOffers, CurrentOfferKey.City, el )}
-                      typePage={typePage}
                       city={el}
                     />))
                 }
