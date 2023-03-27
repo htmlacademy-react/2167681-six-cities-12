@@ -30,7 +30,7 @@ function ReviewItem({review}: ReviewItemProps): JSX.Element {
         <p className="reviews__text">
           {review.discription}
         </p>
-        <time className="reviews__time" dateTime="2019-04-24">April 2019</time>
+        <time className="reviews__time" dateTime="2019-04-24">{review.date.toISOString()}</time>
       </div>
     </li>
   );

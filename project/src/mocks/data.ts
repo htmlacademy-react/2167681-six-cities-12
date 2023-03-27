@@ -26,9 +26,9 @@ export const LATITUDE: number[] = [
 
 export const LONGITUDE: number[] = [
   4.85309666406198,
-  4.85309666406198,
-  4.929309666406198,
   4.939309666406198,
+  4.929309666406198,
+  4.85309666406198,
 ];
 
 export const MAP_ZOOM = 1;
