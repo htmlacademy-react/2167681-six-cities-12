@@ -37,6 +37,9 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
           .addTo(map);
         markers.push(marker);
       });
+
+      const { lat, lng,} = city;
+      map.setView({ lat, lng });
     }
 
     return () => {
@@ -46,7 +49,7 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
         });
       }
     };
-  }, [map, coordinates]);
+  }, [map, coordinates, city]);
 
 
   return (
