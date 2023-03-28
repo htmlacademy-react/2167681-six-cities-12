@@ -43,8 +43,8 @@ function renderMock(i: number): protoOffer {
 	 rating: getRandomIntInclusiveArrayElement(RATING),
     reviews: arrayReviews,
 	 coordinates: {
-      latitude: LATITUDE[i],
-      longitude: LONGITUDE[i],
+      latitude: getRandomIntInclusiveArrayElement(LATITUDE),
+      longitude: getRandomIntInclusiveArrayElement(LONGITUDE),
       zoom: MAP_ZOOM
 	 }
   };

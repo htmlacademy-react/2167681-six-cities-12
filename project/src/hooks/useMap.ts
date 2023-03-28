@@ -9,6 +9,7 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
   const isRenderRef = useRef<boolean>(false);
 
   useEffect(() => {
+
     if (mapRef.current !== null && !isRenderRef.current) {
       const instance = new Map(mapRef.current, {
         center: {
@@ -29,8 +30,11 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
 
       setMap(instance);
       isRenderRef.current = true;
+
     }
-  }, [mapRef, city]);
+
+
+  }, [mapRef, map, city]);
 
   return map;
 }
