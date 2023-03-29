@@ -18,11 +18,13 @@ const defaultCustomIcon = new Icon({
 });
 
 function Map ({city, coordinates, className}: MapProps): JSX.Element {
-
   const mapRef = useRef(null);
-  const map = useMap(mapRef, city);
 
+  const map = useMap(mapRef, city);
   useEffect(() => {
+
+    const markers: Marker[] = [];
+
     if (map) {
       coordinates.forEach(({latitude: lat, longitude: lng}) => {
         const marker = new Marker({
@@ -33,11 +35,21 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
         marker
           .setIcon(defaultCustomIcon)
           .addTo(map);
-
+        markers.push(marker);
       });
+
+      const { lat, lng,} = city;
+      map.setView({ lat, lng });
     }
 
-  }, [map, coordinates]);
+    return () => {
+      if(map) {
+        markers.forEach((marker) => {
+          map.removeLayer(marker);
+        });
+      }
+    };
+  }, [map, coordinates, city]);
 
 
   return (
@@ -46,3 +58,4 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
 }
 
 export default Map;
+

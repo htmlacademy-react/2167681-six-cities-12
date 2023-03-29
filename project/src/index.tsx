@@ -1,13 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './components/app/app';
-import { CatalogCity } from './utils/consts';
 import { arrayOffers, arrayReviews } from './mocks/render';
 import {city} from './mocks/city';
+import { Provider } from 'react-redux';
+import {store} from '../src/store/index';
 
 const Settings = {
   isAuth: false,
-  cityCatalog: CatalogCity,
   city: city
 } as const;
 
@@ -23,8 +23,11 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <React.StrictMode>
-    <App isAuth={Settings.isAuth} offers={OfferDataSet.offers}
-      cityCatalog={CatalogCity} city={city} reviews={OfferDataSet.reviews}
-    />
+    <Provider store={store}>
+      <App isAuth={Settings.isAuth} offers={OfferDataSet.offers}
+        city={city} reviews={OfferDataSet.reviews}
+      />
+    </Provider>
+
   </React.StrictMode>,
 );
