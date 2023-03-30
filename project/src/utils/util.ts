@@ -16,10 +16,3 @@ export const filterOffers = (offers: protoOffer[], currentKey: CurrentOfferKey, 
 };
 
 
-const random = (min: number, max: number) => Math.round(Math.random() * (max - min) + min);
-
-const array = Array.from({length: 10},() => random(1, 10));
-
-console.log(array.sort())
-
-export const sortHightPrice = (a: protoOffer ,b: protoOffer) => a.priceForNight > b.priceForNight ? -1 : 1;
