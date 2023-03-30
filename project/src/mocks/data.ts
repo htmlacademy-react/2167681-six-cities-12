@@ -68,16 +68,16 @@ export const TYPE_OFFER: string[] = [
   'hotel'
 ];
 
-export const COUNT_BEDROOM: string[] = [
-  '1', '2', '3', '4', '5'
+export const COUNT_BEDROOM: number[] = [
+  1, 2, 3, 4, 5
 ];
 
-export const COUNT_GUESTS: string[] = [
-  '1', '2', '3', '4', '5'
+export const COUNT_GUESTS: number[] = [
+  1, 2, 3, 4, 5
 ];
 
-export const PRICE_FOR_NIGHT: string[] = [
-  '150', '250', '350', '9999',
+export const PRICE_FOR_NIGHT: number[] = [
+  150, 250, 350, 9999,
 ];
 
 export const RATING: number[] = [

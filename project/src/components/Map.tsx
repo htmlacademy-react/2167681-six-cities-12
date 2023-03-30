@@ -38,8 +38,15 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
         markers.push(marker);
       });
 
+
       const { lat, lng,} = city;
+     /*  const center = L.latLng({lat:lat, lng: lng})
+      console.log(center)
+      const {latiti, lnglng} = moskow
+      console.log(Math.round(center.distanceTo({lat: latiti, lng: lnglng}) / 1000)) */
+
       map.setView({ lat, lng });
+
     }
 
     return () => {
