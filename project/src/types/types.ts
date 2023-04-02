@@ -1,3 +1,5 @@
+import { SortName } from '../utils/consts';
+
 // Шаблон предложения аренды
 export type protoOffer = {
 	id: string;
@@ -6,9 +8,9 @@ export type protoOffer = {
 	title: string;
 	typeOffer: string;
 	description: string;
-	countBedRoom: string;
-	priceForNight: string;
-	countGuests: string;
+	countBedRoom: number;
+	priceForNight: number;
+	countGuests: number;
 	isFavorite: boolean;
 	isPremium: boolean;
 	rating: number;
@@ -33,6 +35,7 @@ export type Сoordinates = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
+	distance?: number;
  };
 
 export type Review = {
@@ -43,3 +46,6 @@ export type Review = {
 	date: Date;
 	discription: string;
 }
+
+
+export type Sorting = keyof typeof SortName;

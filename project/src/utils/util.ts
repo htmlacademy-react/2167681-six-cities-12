@@ -1,5 +1,6 @@
 import { protoOffer } from '../types/types';
-import {CurrentOfferKey} from './consts';
+import {CurrentOfferKey, DateFormant} from './consts';
+import dayjs from 'dayjs';
 
 
 export const filterOffers = (offers: protoOffer[], currentKey: CurrentOfferKey, value: string | boolean | number) => {
@@ -14,5 +15,8 @@ export const filterOffers = (offers: protoOffer[], currentKey: CurrentOfferKey, 
 
   return result;
 };
+
+
+export const dateFormatting = (date: Date, dateFormat: DateFormant) => dayjs(date).format(dateFormat);
 
 

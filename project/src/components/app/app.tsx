@@ -2,7 +2,7 @@
 import MainPage from '../../pages/Main';
 import Favorites from '../../pages/Favorites';
 import Header from '../Header';
-import PrivateRoute from '../private-route';
+import PrivateRoute from '../privateRoute';
 import Login from '../../pages/Login';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';

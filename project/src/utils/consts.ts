@@ -1,5 +1,19 @@
+/* eslint-disable indent */
+import { protoOffer } from '../types/types';
+import { Sorting } from '../types/types';
 export const MAX_PERCENT_STARS_WIDTH = 100;
 export const STARS_COUNT = 5;
+
+
+export const sortingMethods: {
+      [key in Sorting]: (a: protoOffer, b: protoOffer) => number
+	} = {
+	Popular: () => 0,
+	PriceIncrease: (a, b) => a.priceForNight - b.priceForNight,
+	DecreasingPrice: (a, b) => b.priceForNight - a.priceForNight,
+	TopRatedFirst: (a, b) => a.rating - b.rating,
+	};
+
 
 export enum MapClassName {
 	offerId = 'property__map',
@@ -30,6 +44,10 @@ export enum Counter {
 	Offers = 4,
 }
 
+export enum DateFormant {
+	CommentDate = 'MMMM YYYY'
+}
+
 export enum AuthorizationStatus {
 	Auth = 'AUTH',
 	NoAuth = 'NO_AUTH',
@@ -39,6 +57,13 @@ export enum AuthorizationStatus {
 export enum ActivePage {
 	Favorites = 'favorites',
 	Main = 'main'
+}
+
+export enum SortName {
+	Popular = 'Popular',
+	PriceIncrease = 'Price: low to high',
+	DecreasingPrice = 'Price: high to low',
+	TopRatedFirst = 'Top rated first'
 }
 
 //Города находятся на панели навигации

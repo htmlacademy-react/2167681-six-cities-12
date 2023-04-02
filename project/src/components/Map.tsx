@@ -2,13 +2,14 @@ import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import {Сoordinates, City} from '../types/types';
-import { URL_MARKER_DEFAULT, MapClassName } from '../utils/consts';
+import { URL_MARKER_DEFAULT, MapClassName, URL_MARKER_CURRENT } from '../utils/consts';
 import useMap from '../hooks/useMap';
 
 type MapProps = {
 	city: City;
-	coordinates: Сoordinates[];
+	coordinates: (Сoordinates & {id?: string})[];
 	className: MapClassName;
+	activeOfferId?: string;
 }
 
 const defaultCustomIcon = new Icon({
@@ -17,7 +18,15 @@ const defaultCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-function Map ({city, coordinates, className}: MapProps): JSX.Element {
+
+const currentCustomIcon = new Icon({
+  iconUrl: URL_MARKER_CURRENT,
+  iconSize: [40, 40],
+  iconAnchor: [20, 40]
+});
+
+
+function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
 
   const map = useMap(mapRef, city);
@@ -26,20 +35,23 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
     const markers: Marker[] = [];
 
     if (map) {
-      coordinates.forEach(({latitude: lat, longitude: lng}) => {
+      coordinates.forEach(( { id, latitude: lat, longitude: lng}) => {
         const marker = new Marker({
           lat,
           lng
         });
 
         marker
-          .setIcon(defaultCustomIcon)
+          .setIcon(activeOfferId === id ? currentCustomIcon : defaultCustomIcon)
           .addTo(map);
         markers.push(marker);
       });
 
+
       const { lat, lng,} = city;
+
       map.setView({ lat, lng });
+
     }
 
     return () => {
@@ -49,7 +61,7 @@ function Map ({city, coordinates, className}: MapProps): JSX.Element {
         });
       }
     };
-  }, [map, coordinates, city]);
+  }, [map, coordinates, city, activeOfferId]);
 
 
   return (

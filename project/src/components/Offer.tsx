@@ -1,27 +1,40 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { protoOffer } from '../types/types';
+import { protoOffer} from '../types/types';
 import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
 
 type offerProps = {
 	place: OfferCardClassName;
 	offer: protoOffer;
+	onMouseEntenr?: (id: string) => void;
+	onMouseLeave?: () => void;
 }
 
-function Offer({ offer, place }: offerProps): JSX.Element {
+
+function Offer({
+  offer,
+  place,
+  onMouseEntenr = () => void 0,
+  onMouseLeave = () => void 0
+}: offerProps): JSX.Element {
+
+  const handleMouseEnter = () => {
+    onMouseEntenr(offer.id);
+  };
+
 
   return (
-    <article className={`${place}__card place-card`}>
+    <article className={`${place}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
       {offer.isPremium &&
 				<div className="place-card__mark">
 				  <span>Premium</span>
 				</div>}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
-        <a href="#">
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img className="place-card__image" src={offer.photo} width={ OfferPhotoSize.CommonWidth}
 			 height={ OfferPhotoSize.CommonHeight} alt="Place image"
           />
-        </a>
+        </Link>
       </div>
       <div className={`${place === 'cities' ? '' : 'favorites__card-info'} place-card__info`}>
         <div className="place-card__price-wrapper">
