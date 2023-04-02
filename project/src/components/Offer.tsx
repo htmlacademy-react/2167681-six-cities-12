@@ -1,10 +1,7 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import { protoOffer, OfferDetails,} from '../types/types';
+import { protoOffer} from '../types/types';
 import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector} from '../hooks';
-import { setOfferDetails } from '../store/action';
-//import L from 'leaflet';
 
 type offerProps = {
 	place: OfferCardClassName;
@@ -14,43 +11,17 @@ type offerProps = {
 }
 
 
-/*
-	Таким образом я хочу получать соседние офферы, но пока что возникли проблемы
-  const nearbyFilter = (currentCoordinates : Сoordinates, arrayOffers: protoOffer[]): protoOffer[] => {
-  const {latitude, longitude} = currentCoordinates;
-  const center = L.latLng({lat: latitude , lng: longitude });
-
-  const nearby = arrayOffers.forEach((el) => { вот тут ошибка "тип void не может быть назначен для типа protOffer[]" на const nearby
-	el.coordinates.distance = Math.round(center.distanceTo({lat: el.coordinates.latiti, lng: el.coordinates.lnglng}) / 1000));
-});
-
-  return nearby;
-}
- */
-
 function Offer({
   offer,
   place,
   onMouseEntenr = () => void 0,
   onMouseLeave = () => void 0
 }: offerProps): JSX.Element {
-  const offers: protoOffer[] = useAppSelector((state) => state.offers.filter((el) => el !== offer && el.city === offer.city));
 
   const handleMouseEnter = () => {
     onMouseEntenr(offer.id);
   };
 
-
-  const dataToDetails: OfferDetails = {
-    currentOffer: offer,
-    nearbyOffers: offers
-  };
-
-  // при нажатии на предложение, должен записываться стэйт с предложениями (таргет оффер и ближайшие офферы)
-  const dispatch = useAppDispatch();
- 	const onOfferDetails = () => {
-    dispatch(setOfferDetails(dataToDetails));
-  };
 
   return (
     <article className={`${place}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
@@ -59,7 +30,7 @@ function Offer({
 				  <span>Premium</span>
 				</div>}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
-        <Link to={`${AppRoute.Offer}/${offer.id}`} onClick={onOfferDetails}>
+        <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img className="place-card__image" src={offer.photo} width={ OfferPhotoSize.CommonWidth}
 			 height={ OfferPhotoSize.CommonHeight} alt="Place image"
           />
@@ -89,7 +60,7 @@ function Offer({
           </div>
         </div>
         <h2 className="place-card__name">
-          <Link to={`${AppRoute.Offer}/${offer.id}`} onClick={onOfferDetails}>{offer.title}</Link>
+          <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
         <p className="place-card__type">{offer.typeOffer}</p>
       </div>

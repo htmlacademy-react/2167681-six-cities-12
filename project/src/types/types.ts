@@ -47,11 +47,5 @@ export type Review = {
 	discription: string;
 }
 
-export type OfferDetails = {
-	currentOffer: protoOffer;
-	nearbyOffers: protoOffer[];
-
-
-}
 
 export type Sorting = keyof typeof SortName;
