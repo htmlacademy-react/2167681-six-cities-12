@@ -35,6 +35,7 @@ export type Сoordinates = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
+	distance?: number;
  };
 
 export type Review = {
@@ -44,6 +45,13 @@ export type Review = {
 	rating: number;
 	date: Date;
 	discription: string;
+}
+
+export type OfferDetails = {
+	currentOffer: protoOffer;
+	nearbyOffers: protoOffer[];
+
+
 }
 
 export type Sorting = keyof typeof SortName;

@@ -4,6 +4,8 @@ import Map from '../components/Map';
 import { MapClassName, OfferCardClassName } from '../utils/consts';
 import { City, protoOffer, Review} from '../types/types';
 import Offer from '../components/Offer';
+import { useAppSelector } from '../hooks';
+import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH } from '../utils/consts';
 
 type OfferIdProps = {
 		offers: protoOffer[];
@@ -12,6 +14,11 @@ type OfferIdProps = {
 }
 
 function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
+
+  const dataToDetails = useAppSelector((state) => state.offerDetails);
+
+  const {currentOffer, /* nearbyOffers */} = dataToDetails;
+
   return (
     <div>
       <main className="page__main page__main--property">
@@ -40,12 +47,13 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {currentOffer.isPremium ?
+                <div className="property__mark">
+                  <span>Premium</span>
+                </div> : <> </>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  Beautiful &amp; luxurious studio at great location
+                  {currentOffer.title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -56,24 +64,28 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
-                  <span style={{width: '80%'}}></span>
+                  <span style={{
+                    width: `${MAX_PERCENT_STARS_WIDTH * currentOffer.rating / STARS_COUNT}%`
+                  }}
+                  >
+                  </span>
                   <span className="visually-hidden">Rating</span>
                 </div>
-                <span className="property__rating-value rating__value">4.8</span>
+                <span className="property__rating-value rating__value">{currentOffer.rating}</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  Apartment
+                  {currentOffer.typeOffer}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                  3 Bedrooms
+                  {currentOffer.countBedRoom}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  Max 4 adults
+                  {currentOffer.countGuests}
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;120</b>
+                <b className="property__price-value">&euro;{currentOffer.priceForNight}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
@@ -126,24 +138,23 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    A quiet cozy and picturesque that hides behind a a river by the unique lightness of Amsterdam. The building is green and from 18th century.
+                    {currentOffer.description}
                   </p>
                   <p className="property__text">
-                    An independent House, strategically located between Rembrand Square and National Opera, but where the bustle of the city comes to rest in this alley flowery and colorful.
                   </p>
                 </div>
               </div>
               <section className="property__reviews reviews">
                 {/* Лист с комментариями */}
-                <ReviewsList reviews={reviews} />
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{reviews.length}</span></h2>
+                <ReviewsList reviews={currentOffer.reviews} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{currentOffer.reviews.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
                 <CommentForm/>
               </section>
             </div>
           </div>
           {/* место для карты города (отображаются предложения по соседству) */}
-          <Map className={MapClassName.offerId} coordinates={offers.map((el) => el.coordinates )} city={city} />
+          <Map className={MapClassName.offerId} activeOfferId={currentOffer.id} coordinates={offers.map(({id, coordinates}) =>({id, ...coordinates }))} city={city}/>
         </section>
         <div className="container">
           <section className="near-places places">

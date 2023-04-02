@@ -25,14 +25,14 @@ function PlacesSorts(): JSX.Element {
       <span className="places__sorting-type" tabIndex={0} onClick={onSortListHidden}>
         {SortName[currentSort]}
       </span>
-      <ul className={`places__options places__options--custom places__options--${!sortList ? 'opened' : 'closed'}`} >
+      <ul className={`places__options places__options--custom places__options--${sortList ? 'opened' : 'closed'}`} >
         {(Object.entries(SortName) as [Sorting, SortName][]).map(([name, info]) =>
           (
             <li key={name}
               onClick={() => {
                 onSortTypeChange(name);
                 onSortListHidden();
-              }} className="places__option" tabIndex={0}
+              }} className={`places__option ${name === currentSort ? 'places__option--active' : ''}`} tabIndex={0}
             >{info}
             </li>)
         )}

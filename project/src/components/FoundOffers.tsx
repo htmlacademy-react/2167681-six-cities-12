@@ -6,12 +6,18 @@ import Map from './Map';
 import { useAppSelector} from '../hooks';
 import PlacesSorts from './placesSorts';
 import { sortingMethods } from '../utils/consts';
+import { useState } from 'react';
 
 function FoundOffers(): JSX.Element {
 
   const currentCity = useAppSelector((state) => state.city);
   const currentSort = useAppSelector((state) => state.sorting);
   const currentOffers = useAppSelector((state) => state.offers.filter((offer) => offer.city === state.city.title ).sort(sortingMethods[currentSort]) );
+  const [activeOffer, setActiveOffer] = useState<string>('');
+
+  const onMouseEnterId = (id: string) => setActiveOffer(id);
+
+  const onMouseLeave = () => setActiveOffer('');
 
   return (
     <div className="cities">
@@ -31,18 +37,17 @@ function FoundOffers(): JSX.Element {
               <PlacesSorts />
               <div className="cities__places-list places__list tabs__content">
                 {/* Блок для карточек с недвижимостью */}
-                {currentOffers.map((el) => (<Offer key={el.id} offer={el} place={OfferCardClassName.main}/>
+                {currentOffers.map((el) => (<Offer onMouseEntenr={onMouseEnterId} onMouseLeave={onMouseLeave} key={el.id} offer={el} place={OfferCardClassName.main}/>
                 ))}
               </div>
             </>}
-
         </section>
         <div className="cities__right-section">
           {currentOffers.length === 0 ?
 			 /* заставка пустого экрана */
             <img className="no-places" src="img/no-places.png" alt="" /> :
           /* карта города */
-            <Map city={currentCity} coordinates={currentOffers.map((el) => el.coordinates )} className={MapClassName.main}/>}
+            <Map activeOfferId={activeOffer} city={currentCity} coordinates={currentOffers.map(({id, coordinates}) => ( {id, ...coordinates}) )} className={MapClassName.main}/>}
         </div>
       </div>
     </div>);

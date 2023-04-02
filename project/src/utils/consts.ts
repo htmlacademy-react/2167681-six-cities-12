@@ -8,7 +8,7 @@ export const STARS_COUNT = 5;
 export const sortingMethods: {
       [key in Sorting]: (a: protoOffer, b: protoOffer) => number
 	} = {
-	Popular: (a, b) => a.reviews.length - b.reviews.length,
+	Popular: () => 0,
 	PriceIncrease: (a, b) => a.priceForNight - b.priceForNight,
 	DecreasingPrice: (a, b) => b.priceForNight - a.priceForNight,
 	TopRatedFirst: (a, b) => a.rating - b.rating,
@@ -42,6 +42,10 @@ export enum OfferPhotoSize {
 
 export enum Counter {
 	Offers = 4,
+}
+
+export enum DateFormant {
+	CommentDate = 'MMMM YYYY'
 }
 
 export enum AuthorizationStatus {

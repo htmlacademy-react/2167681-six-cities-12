@@ -1,9 +1,7 @@
 import {useState, useEffect, useRef, MutableRefObject} from 'react';
-import L, {Map, TileLayer} from 'leaflet';
+import {Map, TileLayer} from 'leaflet';
 import { City } from '../types/types';
 
-
-// что такое .current??
 function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map | null {
   const [map, setMap] = useState<Map | null>(null);
   const isRenderRef = useRef<boolean>(false);
@@ -26,7 +24,6 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
       );
 
       instance.addLayer(layer);
-		  
       setMap(instance);
       isRenderRef.current = true;
 
