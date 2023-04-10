@@ -1,7 +1,6 @@
 import Footer from '../components/Footer';
-import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { Helmet } from 'react-helmet-async';
-import { CurrentOfferKey } from '../utils/consts';
+
 //import {filterOffers} from '../utils/util';
 import { useAppSelector } from '../hooks';
 
@@ -9,9 +8,8 @@ import { useAppSelector } from '../hooks';
 function Favorites (): JSX.Element {
   const offers = useAppSelector((state) => state.toolkit.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
-  const offerLocation: string[] = favoriteOffers.map((el) => el.city.name);
-  const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));
-  console.log('offers');
+  // const offerLocation: string[] = favoriteOffers.map((el) => el.city.name);
+  // const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));
 
   return (
     <>
