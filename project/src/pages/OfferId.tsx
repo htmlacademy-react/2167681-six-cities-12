@@ -1,18 +1,50 @@
+/* eslint-disable react/jsx-closing-tag-location */
+/* eslint-disable indent */
 import CommentForm from '../components/CommentForm';
 import ReviewsList from '../components/ReviewsList';
 import Map from '../components/Map';
 import { MapClassName, OfferCardClassName } from '../utils/consts';
-import { City, protoOffer, Review} from '../types/types';
 import Offer from '../components/Offer';
-import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH } from '../utils/consts';
+import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH} from '../utils/consts';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { useParams } from 'react-router-dom';
+import { fetchNearbyOffers, fetchOffer, fetchOfferComments } from '../store/action';
+import { useEffect } from 'react';
+import Spinner from '../components/Spinner';
 
-type OfferIdProps = {
-		offers: protoOffer[];
-		city: City;
-		reviews: Review[];
-}
+function OfferId (): JSX.Element |null {
+  const params = useParams();
+  const dispatch = useAppDispatch();
+  const offer = useAppSelector((state) => state.toolkit.offer);
+  const isOfferLoading = useAppSelector((state) => state.toolkit.isOfferLoading);
+  const nearbyOffers = useAppSelector((state) => state.toolkit.nearbyOffers);
+  const comments = useAppSelector((state) => state.toolkit.comments);
 
-function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
+  useEffect(() => {
+    const {id} = params;
+
+    if (id) {
+      const parsedId = Number(id);
+      dispatch(fetchOffer(parsedId));
+      dispatch(fetchNearbyOffers(parsedId));
+      dispatch(fetchOfferComments(parsedId));
+    }
+
+  }, [params, dispatch]);
+
+  if (!offer) {
+    return null;
+  }
+
+  if (isOfferLoading) {
+    return <Spinner/>;
+  }
+
+  const {id, city, title, type, description, bedrooms, price, host, images, maxAdults,
+   isPremium, goods, rating, location } = offer;
+
+	const locations = nearbyOffers.map(({id: nearbyId, location: nearbyLocation}) => ({id: nearbyId, ...nearbyLocation}));
+	locations.push({id, ...location});
 
   return (
     <div>
@@ -20,34 +52,25 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/room.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-02.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-03.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/studio-01.jpg" alt="Photo studio" />
-              </div>
-              <div className="property__image-wrapper">
-                <img className="property__image" src="img/apartment-01.jpg" alt="Photo studio" />
-              </div>
+              {
+                (images.slice(0,6).map((image) => (
+                  <div key={image} className="property__image-wrapper">
+                    <img className="property__image" key={image} src={`${image}`} alt="Photo studio" />
+                  </div>
+                )
+                ))
+              }
             </div>
           </div>
           <div className="property__container container">
             <div className="property__wrapper">
-              <div className="property__mark">
-                <span>Premium</span>
-              </div>
+              {isPremium &&
+					<div className="property__mark">
+					<span>Premium</span>
+					</div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
-                  title
+                  {title}
                 </h1>
                 <button className="property__bookmark-button button" type="button">
                   <svg className="property__bookmark-icon" width="31" height="33">
@@ -59,62 +82,33 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
                   <span style={{
-                    width: `${MAX_PERCENT_STARS_WIDTH * 4 / STARS_COUNT}%`
+                    width: `${MAX_PERCENT_STARS_WIDTH * rating / STARS_COUNT}%`
                   }}
                   >
                   </span>
-                  <span className="visually-hidden">Rating</span>
+                  <span className="visually-hidden">{rating}</span>
                 </div>
                 <span className="property__rating-value rating__value">rating</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">
-                  typeOffer
+                  {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                 countBedRoom
+                 {bedrooms}
                 </li>
                 <li className="property__feature property__feature--adults">
-                  countGuests
+                  {maxAdults}
                 </li>
               </ul>
               <div className="property__price">
-                <b className="property__price-value">&euro;currentOffer</b>
+                <b className="property__price-value">&euro;{price}</b>
                 <span className="property__price-text">&nbsp;night</span>
               </div>
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-                  <li className="property__inside-item">
-                    Wi-Fi
-                  </li>
-                  <li className="property__inside-item">
-                    Washing machine
-                  </li>
-                  <li className="property__inside-item">
-                    Towels
-                  </li>
-                  <li className="property__inside-item">
-                    Heating
-                  </li>
-                  <li className="property__inside-item">
-                    Coffee machine
-                  </li>
-                  <li className="property__inside-item">
-                    Baby seat
-                  </li>
-                  <li className="property__inside-item">
-                    Kitchen
-                  </li>
-                  <li className="property__inside-item">
-                    Dishwasher
-                  </li>
-                  <li className="property__inside-item">
-                    Cabel TV
-                  </li>
-                  <li className="property__inside-item">
-                    Fridge
-                  </li>
+						{(goods.map((good) => ( <li key={good} className="property__inside-item">{good}</li>)))}
                 </ul>
               </div>
               <div className="property__host">
@@ -124,15 +118,16 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
                     <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                    Angelina
+                   {host.name}
                   </span>
-                  <span className="property__user-status">
+						{host.isPro &&
+						<span className="property__user-status">
                     Pro
-                  </span>
+                  </span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
-                    description
+                    {description}
                   </p>
                   <p className="property__text">
                   </p>
@@ -140,22 +135,22 @@ function OfferId ({offers, city, reviews}: OfferIdProps): JSX.Element {
               </div>
               <section className="property__reviews reviews">
                 {/* Лист с комментариями */}
-                <ReviewsList reviews={reviews} />
-                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">length</span></h2>
+                <ReviewsList comments={comments} />
+                <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
                 <CommentForm/>
               </section>
             </div>
           </div>
           {/* место для карты города (отображаются предложения по соседству) */}
-          <Map className={MapClassName.offerId} activeOfferId={offers[0].id} coordinates={offers.map(({id, coordinates}) =>({id, ...coordinates }))} city={city}/>
+           <Map className={MapClassName.offerId} activeOfferId={id} coordinates={locations} city={city}/>
         </section>
         <div className="container">
           <section className="near-places places">
             <h2 className="near-places__title">Other places in the neighbourhood</h2>
             <div className="near-places__list places__list">
               {/* место для предложенй */}
-              {offers.map((offer) => <Offer key={offer.id} offer={offer} place={OfferCardClassName.offerId}/>)}
+              {nearbyOffers.map((el) => <Offer key={el.id} offer={el} place={OfferCardClassName.offerId}/>)}
             </div>
           </section>
         </div>

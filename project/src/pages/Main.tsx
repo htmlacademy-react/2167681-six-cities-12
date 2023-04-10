@@ -1,7 +1,7 @@
 import FoundOffers from '../components/FoundOffers';
 import LocationItem from '../components/LocationItem';
 import { Helmet } from 'react-helmet-async';
-import { cities } from '../mocks/city';
+import { cities } from '../utils/consts';
 
 
 function MainPage(): JSX.Element {
@@ -18,7 +18,7 @@ function MainPage(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {cities.map((el) => <LocationItem key={el.title} city={el.title}/>)}
+              {cities.map((el) => <LocationItem key={el.name} city={el.name}/>)}
             </ul>
           </section>
         </div>

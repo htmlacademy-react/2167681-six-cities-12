@@ -2,11 +2,11 @@ import { Sorting } from '../types/types';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { SortName } from '../utils/consts';
 import {useState} from 'react';
-import { setSort } from '../store/action';
+import { setSort } from '../store/offerSlicer';
 
 
 function PlacesSorts(): JSX.Element {
-  const currentSort = useAppSelector((state) => state.sorting);
+  const currentSort = useAppSelector((state) => state.toolkit.sorting);
 
   const [sortList, setSortList] = useState<boolean>(false);
   const onSortListHidden = () => {

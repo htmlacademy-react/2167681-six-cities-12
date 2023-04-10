@@ -8,40 +8,31 @@ import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';
 import { AppRoute, AuthorizationStatus, } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
-import { protoOffer, City, Review } from '../../types/types';
 import OfferId from '../../pages/OfferId';
 
-type AppScreenProps = {
-	isAuth: boolean;
-	offers: protoOffer[];
-	city: City;
-	reviews: Review[];
-};
+
+function App(): JSX.Element {
 
 
-function App({ isAuth, offers, city, reviews}: AppScreenProps): JSX.Element {
   return (
     <HelmetProvider>
       <BrowserRouter>
         <Routes>
-          <Route path={AppRoute.Main} element={<Header isAuth={isAuth} />}>
+          <Route path={AppRoute.Main} element={<Header />}>
             <Route index element={<MainPage />}
             />
             <Route path={AppRoute.Login} element={<Login />} />
-
             <Route path={AppRoute.Favorites} element={
               <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
-                <Favorites offers={offers}/>
+                <Favorites />
               </PrivateRoute>
             } />
-
-            <Route path={`${AppRoute.Offer}/:id`} element={<OfferId offers={offers} city={city} reviews={reviews}/>}/>
+            <Route path={`${AppRoute.Offer}/:id`} element={<OfferId />}/>
             <Route path='/*' element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>
     </HelmetProvider>
-
   );
 }
 

@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-shadow */
 /* eslint-disable indent */
-import { protoOffer } from '../types/types';
+import { protoOffer, City } from '../types/types';
 import { Sorting } from '../types/types';
 export const MAX_PERCENT_STARS_WIDTH = 100;
 export const STARS_COUNT = 5;
 
 
 export const sortingMethods: {
-      [key in Sorting]: (a: protoOffer, b: protoOffer) => number
-	} = {
+	[key in Sorting]: (a: protoOffer, b: protoOffer) => number
+} = {
 	Popular: () => 0,
-	PriceIncrease: (a, b) => a.priceForNight - b.priceForNight,
-	DecreasingPrice: (a, b) => b.priceForNight - a.priceForNight,
+	PriceIncrease: (a, b) => a.price - b.price,
+	DecreasingPrice: (a, b) => b.price - a.price,
 	TopRatedFirst: (a, b) => a.rating - b.rating,
-	};
+};
 
 
 export enum MapClassName {
@@ -68,29 +69,30 @@ export enum SortName {
 
 //Города находятся на панели навигации
 export const CatalogCity: string[] = [
-  'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels',
+	'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels',
 ];
 
 export enum CurrentOfferKey {
+	Images = 'images',
 	Id = 'id',
-	Photo = 'photo',
+	PreviewImage = 'previewImage',
 	City = 'city',
 	Title = 'title',
-	TypeOffer = 'typeOffer',
+	TypeOffer = 'type',
 	Description = 'description',
-	CountBedRoom = 'countBedRoom',
-	PriceForNight = 'priceForNight',
-	CountGuests = 'countGuests',
+	CountBedRoom = 'bedrooms',
+	PriceForNight = 'price',
+	MaxAdults = 'maxAdults',
 	IsFavorite = 'isFavorite',
 	IsPremium = 'isPremium',
 	Rating = 'rating',
 }
 
 export const NEW_CITY = {
-  title: 'Нью-Йорк',
-  lat: 40.835292,
-  lng: -73.916236,
-  zoom: 10,
+	title: 'Нью-Йорк',
+	lat: 40.835292,
+	lng: -73.916236,
+	zoom: 10,
 };
 
 export const URL_MARKER_DEFAULT =
@@ -98,3 +100,63 @@ export const URL_MARKER_DEFAULT =
 
 export const URL_MARKER_CURRENT =
 	'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/main-pin.svg';
+
+
+export enum ApiMethods {
+	POST = 'POST',
+	GET = 'GET',
+	PUT = 'PUT',
+	DELETE = 'DELETE',
+
+}
+
+export const cities: City [] = [
+	{
+	name: 'Paris',
+	location: {
+		latitude: 48.858940,
+		longitude: 2.343173,
+		zoom: 10,
+	}
+},
+	{
+	name: 'Cologne',
+	location:{
+		latitude: 50.940331,
+		longitude: 6.959726,
+		zoom: 10,
+	}
+},
+	{
+	name: 'Amsterdam',
+	location:{
+		latitude: 52.377994,
+	longitude: 4.916109,
+	zoom: 10,
+	}
+},
+	{
+	name: 'Hamburg',
+	location:{
+		latitude: 53.546736,
+	longitude: 9.987128,
+	zoom: 10,
+	}
+},
+	{
+		name: 'Dusseldorf',
+		location:{
+			latitude: 51.223523,
+			longitude: 6.776697,
+			zoom: 10,
+		}
+},
+	{
+	name: 'Brussels',
+	location:{
+		latitude: 50.864958,
+	longitude: 4.356678,
+	zoom: 10,
+	}
+}
+ ];

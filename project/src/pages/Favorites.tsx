@@ -1,19 +1,15 @@
 import Footer from '../components/Footer';
-import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { Helmet } from 'react-helmet-async';
-import { CurrentOfferKey } from '../utils/consts';
-import { protoOffer } from '../types/types';
-import {filterOffers} from '../utils/util';
 
-type FvoritesProps = {
-	offers: protoOffer[];
-}
+//import {filterOffers} from '../utils/util';
+import { useAppSelector } from '../hooks';
 
-function Favorites ({offers} : FvoritesProps): JSX.Element {
 
-  const favoriteOffers = filterOffers(offers, CurrentOfferKey.IsFavorite, true);
-  const offerLocation: string[] = favoriteOffers.map((el) => el.city);
-  const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));
+function Favorites (): JSX.Element {
+  const offers = useAppSelector((state) => state.toolkit.offers);
+  const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
+  // const offerLocation: string[] = favoriteOffers.map((el) => el.city.name);
+  // const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));
 
   return (
     <>
@@ -34,14 +30,14 @@ function Favorites ({offers} : FvoritesProps): JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {
+                {/*                 {
                   currentLocation.map((el) => (
                     <FavoritesLocationContainer
                       key={el}
                       offers={filterOffers(favoriteOffers, CurrentOfferKey.City, el )}
                       city={el}
                     />))
-                }
+                } */}
               </ul>
             </section>}
         </div>
