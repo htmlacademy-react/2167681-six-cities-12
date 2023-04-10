@@ -9,7 +9,6 @@ import NotFound from '../NotFound';
 import { AppRoute, AuthorizationStatus, } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
 import OfferId from '../../pages/OfferId';
-import { useAppSelector} from '../../hooks';
 
 
 function App(): JSX.Element {

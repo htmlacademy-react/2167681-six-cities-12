@@ -14,7 +14,4 @@ export const createAPI = (): AxiosInstance => {
   return api;
 };
 
-createAPI().get('/hotels').then((response) => {
-  console.log(response);
-});
 
