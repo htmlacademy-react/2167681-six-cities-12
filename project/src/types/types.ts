@@ -1,21 +1,30 @@
 import { SortName } from '../utils/consts';
 
+export type User = {
+	id: number;
+	avatarUrl: string;
+	name: string;
+	isPro: boolean;
+}
+
 // Шаблон предложения аренды
 export type protoOffer = {
-	id: string;
-	photo: string;
-	city: string;
+	id: number;
+	previewImage: string;
+	city: City;
 	title: string;
-	typeOffer: string;
+	type: string;
 	description: string;
-	countBedRoom: number;
-	priceForNight: number;
-	countGuests: number;
+	bedrooms: number;
+	price: number;
+	host: User;
+	images: string[];
+	maxAdults: number;
 	isFavorite: boolean;
 	isPremium: boolean;
+	goods: string[];
 	rating: number;
-	reviews: Review[];
-	coordinates: Сoordinates;
+	location: Location;
 };
 
 // тип данных для работы с картой
@@ -25,17 +34,14 @@ export type coordinatesMap = {
 }
 
 export type City = {
-	title: string;
-	lat: number;
-	lng: number;
-	zoom: number;
+	name: string;
+	location: Location;
  };
 
-export type Сoordinates = {
+export type Location = {
 	latitude: number;
 	longitude: number;
 	zoom: number;
-	distance?: number;
  };
 
 export type Review = {
@@ -47,5 +53,19 @@ export type Review = {
 	discription: string;
 }
 
+export type Comment = {
+	comment: string;
+	date: Date;
+	id: number;
+	rating: number;
+	user: {
+		avatarUrl: string;
+		id: number;
+		isPro: boolean;
+		name: string;
+	};
+}
+
 
 export type Sorting = keyof typeof SortName;
+

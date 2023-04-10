@@ -1,6 +1,6 @@
-import { cities } from '../mocks/city';
+import { cities } from '../utils/consts';
 import { useAppDispatch } from '../hooks';
-import { setCity } from '../store/action';
+import { setCity } from '../store/offerSlicer';
 import { City } from '../types/types';
 // Кнопка с названием города (для поиска предложений)
 
@@ -13,7 +13,7 @@ function LocationItem ({city}: LocationProps): JSX.Element {
   const dispatch = useAppDispatch();
 
   const handleCurrentCity = () => {
-    const currentCity = (cities.filter((el) => el.title === city ));
+    const currentCity = (cities.filter((el) => el.name === city ));
     const x: City = {...currentCity[0]};
     return dispatch(setCity(x));
   };

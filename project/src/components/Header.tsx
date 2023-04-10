@@ -1,11 +1,9 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
 import {Outlet} from 'react-router-dom';
 
-type HeaderProps = {
-	isAuth: boolean;
-}
 
-function Header ({isAuth} : HeaderProps): JSX.Element {
+function Header (): JSX.Element {
+  const isAuth = true;
   return (
     <>{/*  если пользователь авторизван */}
       <header className="header">

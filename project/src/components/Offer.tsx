@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 type offerProps = {
 	place: OfferCardClassName;
 	offer: protoOffer;
-	onMouseEntenr?: (id: string) => void;
+	onMouseEnter?: (id: number) => void;
 	onMouseLeave?: () => void;
 }
 
@@ -14,12 +14,12 @@ type offerProps = {
 function Offer({
   offer,
   place,
-  onMouseEntenr = () => void 0,
+  onMouseEnter = () => void 0,
   onMouseLeave = () => void 0
 }: offerProps): JSX.Element {
 
   const handleMouseEnter = () => {
-    onMouseEntenr(offer.id);
+    onMouseEnter(offer.id);
   };
 
 
@@ -31,7 +31,7 @@ function Offer({
 				</div>}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
-          <img className="place-card__image" src={offer.photo} width={ OfferPhotoSize.CommonWidth}
+          <img className="place-card__image" src={offer.previewImage} width={ OfferPhotoSize.CommonWidth}
 			 height={ OfferPhotoSize.CommonHeight} alt="Place image"
           />
         </Link>
@@ -39,7 +39,7 @@ function Offer({
       <div className={`${place === 'cities' ? '' : 'favorites__card-info'} place-card__info`}>
         <div className="place-card__price-wrapper">
           <div className="place-card__price">
-            <b className="place-card__price-value">&euro;{offer.priceForNight}</b>
+            <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
           <button className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
@@ -62,7 +62,7 @@ function Offer({
         <h2 className="place-card__name">
           <Link to={`${AppRoute.Offer}/${offer.id}`}>{offer.title}</Link>
         </h2>
-        <p className="place-card__type">{offer.typeOffer}</p>
+        <p className="place-card__type">{offer.type}</p>
       </div>
     </article>
   );

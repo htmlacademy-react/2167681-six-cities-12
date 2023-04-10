@@ -1,15 +1,15 @@
 import {Icon, Marker} from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
-import {Сoordinates, City} from '../types/types';
+import {Location, City} from '../types/types';
 import { URL_MARKER_DEFAULT, MapClassName, URL_MARKER_CURRENT } from '../utils/consts';
 import useMap from '../hooks/useMap';
 
 type MapProps = {
 	city: City;
-	coordinates: (Сoordinates & {id?: string})[];
+	coordinates: (Location & {id?: number})[];
 	className: MapClassName;
-	activeOfferId?: string;
+	activeOfferId?: number | null;
 }
 
 const defaultCustomIcon = new Icon({
@@ -48,9 +48,9 @@ function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Elem
       });
 
 
-      const { lat, lng,} = city;
+      const { location} = city;
 
-      map.setView({ lat, lng });
+      map.setView({ lat:location.latitude, lng:location.longitude });
 
     }
 

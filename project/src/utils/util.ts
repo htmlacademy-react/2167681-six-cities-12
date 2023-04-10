@@ -16,7 +16,6 @@ export const filterOffers = (offers: protoOffer[], currentKey: CurrentOfferKey, 
   return result;
 };
 
-
 export const dateFormatting = (date: Date, dateFormat: DateFormant) => dayjs(date).format(dateFormat);
 
 
