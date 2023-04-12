@@ -15,10 +15,10 @@ import Spinner from '../components/Spinner';
 function OfferId (): JSX.Element |null {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.toolkit.offer);
-  const isOfferLoading = useAppSelector((state) => state.toolkit.isOfferLoading);
-  const nearbyOffers = useAppSelector((state) => state.toolkit.nearbyOffers);
-  const comments = useAppSelector((state) => state.toolkit.comments);
+  const offer = useAppSelector((state) => state.offersPath.offer);
+  const isOfferLoading = useAppSelector((state) => state.offersPath.isOfferLoading);
+  const nearbyOffers = useAppSelector((state) => state.offersPath.nearbyOffers);
+  const comments = useAppSelector((state) => state.offersPath.comments);
 
   useEffect(() => {
     const {id} = params;

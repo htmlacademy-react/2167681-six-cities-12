@@ -6,7 +6,7 @@ import { useAppSelector } from '../hooks';
 
 
 function Favorites (): JSX.Element {
-  const offers = useAppSelector((state) => state.toolkit.offers);
+  const offers = useAppSelector((state) => state.offersPath.offers);
   const favoriteOffers = offers.filter((offer) => offer.isFavorite === true);
   // const offerLocation: string[] = favoriteOffers.map((el) => el.city.name);
   // const currentLocation = offerLocation.filter((el, i) => i === offerLocation.indexOf(el));

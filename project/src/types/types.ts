@@ -5,6 +5,8 @@ export type User = {
 	avatarUrl: string;
 	name: string;
 	isPro: boolean;
+	token: string;
+	email: string;
 }
 
 // Шаблон предложения аренды
@@ -58,14 +60,10 @@ export type Comment = {
 	date: Date;
 	id: number;
 	rating: number;
-	user: {
-		avatarUrl: string;
-		id: number;
-		isPro: boolean;
-		name: string;
-	};
+	user: User;
 }
 
+export type userAuth = Pick<User, 'email'> & {password: string};
 
 export type Sorting = keyof typeof SortName;
 
