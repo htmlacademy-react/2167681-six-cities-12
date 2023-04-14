@@ -14,7 +14,6 @@ function Header (): JSX.Element {
   const userEmail = useAppSelector((state) => state.userAuthPath.user);
   const favoriteOffers = useAppSelector((state) => state.offersPath.offers).filter((el) => el.isFavorite === true);
 
-
   return (
     <>{/*  если пользователь авторизван */}
       <header className="header">
