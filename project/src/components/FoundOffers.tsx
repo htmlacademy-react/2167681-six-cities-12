@@ -10,9 +10,9 @@ import { useState } from 'react';
 
 function FoundOffers(): JSX.Element {
 
-  const currentCity = useAppSelector((state) => state.toolkit.city);
-  const currentSort = useAppSelector((state) => state.toolkit.sorting);
-  const currentOffers = useAppSelector((state) => state.toolkit.offers.filter((offer) => offer.city.name === state.toolkit.city.name ).sort(sortingMethods[currentSort]));
+  const currentCity = useAppSelector((state) => state.offersPath.city);
+  const currentSort = useAppSelector((state) => state.offersPath.sorting);
+  const currentOffers = useAppSelector((state) => state.offersPath.offers.filter((offer) => offer.city.name === state.offersPath.city.name ).sort(sortingMethods[currentSort]));
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
 
   const onMouseEnterId = (id: number) => setActiveOffer(id);

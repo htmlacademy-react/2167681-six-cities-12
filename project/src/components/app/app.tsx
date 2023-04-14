@@ -6,7 +6,7 @@ import PrivateRoute from '../privateRoute';
 import Login from '../../pages/Login';
 import { BrowserRouter, Routes, Route, } from 'react-router-dom';
 import NotFound from '../NotFound';
-import { AppRoute, AuthorizationStatus, } from '../../utils/consts';
+import { AppRoute } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
 import OfferId from '../../pages/OfferId';
 
@@ -23,7 +23,7 @@ function App(): JSX.Element {
             />
             <Route path={AppRoute.Login} element={<Login />} />
             <Route path={AppRoute.Favorites} element={
-              <PrivateRoute authorizationStatus={AuthorizationStatus.Auth}>
+              <PrivateRoute >
                 <Favorites />
               </PrivateRoute>
             } />

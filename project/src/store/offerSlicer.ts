@@ -1,19 +1,8 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {City, protoOffer, Sorting, Comment} from '../types/types';
+import {City, Sorting} from '../types/types';
 import { fetchNearbyOffers, fetchOffer, fetchOfferComments, fetchOffers} from './action';
 import { SortName, cities } from '../utils/consts';
-
-
-export type Store = {
-  city: City;
-  offers: protoOffer[];
-  sorting: Sorting;
-  isOffersLoading: boolean;
-  isOfferLoading: boolean;
-  offer: protoOffer | null;
-  nearbyOffers: protoOffer[];
-  comments: Comment[];
-}
+import { Store } from '../types/state';
 
 const initialState: Store = {
   city: cities[0],

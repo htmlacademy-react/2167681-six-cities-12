@@ -6,7 +6,7 @@ import { setSort } from '../store/offerSlicer';
 
 
 function PlacesSorts(): JSX.Element {
-  const currentSort = useAppSelector((state) => state.toolkit.sorting);
+  const currentSort = useAppSelector((state) => state.offersPath.sorting);
 
   const [sortList, setSortList] = useState<boolean>(false);
   const onSortListHidden = () => {
