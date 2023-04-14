@@ -5,12 +5,14 @@ import ReviewsList from '../components/ReviewsList';
 import Map from '../components/Map';
 import { MapClassName, OfferCardClassName } from '../utils/consts';
 import Offer from '../components/Offer';
-import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH} from '../utils/consts';
+import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH, AuthorizationStatus} from '../utils/consts';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchNearbyOffers, fetchOffer, fetchOfferComments } from '../store/action';
+import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet } from '../store/action';
 import { useEffect } from 'react';
 import Spinner from '../components/Spinner';
+import { commentAuth } from '../types/types';
+
 
 function OfferId (): JSX.Element |null {
   const params = useParams();
@@ -19,6 +21,7 @@ function OfferId (): JSX.Element |null {
   const isOfferLoading = useAppSelector((state) => state.offersPath.isOfferLoading);
   const nearbyOffers = useAppSelector((state) => state.offersPath.nearbyOffers);
   const comments = useAppSelector((state) => state.offersPath.comments);
+  const authorizationStatus = useAppSelector((state) => state.userAuthPath.authorizationStatus);
 
   useEffect(() => {
     const {id} = params;
@@ -43,8 +46,15 @@ function OfferId (): JSX.Element |null {
   const {id, city, title, type, description, bedrooms, price, host, images, maxAdults,
    isPremium, goods, rating, location } = offer;
 
-	const locations = nearbyOffers.map(({id: nearbyId, location: nearbyLocation}) => ({id: nearbyId, ...nearbyLocation}));
+  const locations = nearbyOffers.map(({id: nearbyId, location: nearbyLocation}) => ({id: nearbyId, ...nearbyLocation}));
 	locations.push({id, ...location});
+
+
+ const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
+
+    dispatch(postCommet({id, ...formData}));
+ };
+
 
   return (
     <div>
@@ -138,7 +148,8 @@ function OfferId (): JSX.Element |null {
                 <ReviewsList comments={comments} />
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
-                <CommentForm/>
+                { authorizationStatus === AuthorizationStatus.Auth &&
+						<CommentForm onSubmit={onFormSubmit}/>}
               </section>
             </div>
           </div>

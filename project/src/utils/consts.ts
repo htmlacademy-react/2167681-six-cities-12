@@ -15,6 +15,15 @@ export const sortingMethods: {
 	TopRatedFirst: (a, b) => a.rating - b.rating,
 };
 
+export enum ApiRoutes {
+	Offers = '/hotels',
+	Comments = '/comments',
+	Login = '/login'
+}
+
+export enum ResponseCode {
+	NotFound = 404
+}
 
 export enum MapClassName {
 	offerId = 'property__map',
@@ -31,7 +40,8 @@ export enum AppRoute {
 	Main = '/',
 	Login = '/login',
 	Favorites = '/favorites',
-	Offer = '/offers/:id'
+	Offer = '/offers/:id',
+	NotFound = '/404'
 }
 
 export enum OfferPhotoSize {

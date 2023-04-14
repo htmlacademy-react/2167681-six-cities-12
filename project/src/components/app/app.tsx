@@ -28,7 +28,7 @@ function App(): JSX.Element {
               </PrivateRoute>
             } />
             <Route path={`${AppRoute.Offer}/:id`} element={<OfferId />}/>
-            <Route path='/*' element={<NotFound />} />
+            <Route path={'/*'} element={<NotFound />} />
           </Route>
         </Routes>
       </BrowserRouter>

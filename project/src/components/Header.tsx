@@ -12,8 +12,7 @@ function Header (): JSX.Element {
 
   const isAuth = useAppSelector((state) => state.userAuthPath.authorizationStatus);
   const userEmail = useAppSelector((state) => state.userAuthPath.user);
-  const favoriteOffers = useAppSelector((state) => state.offersPath.offers).filter((el) => el.isFavorite === true);
-
+  const favoriteOffers = useAppSelector((state) => state.offersPath.offers).filter((el) => el.isFavorite);
 
   return (
     <>{/*  если пользователь авторизван */}

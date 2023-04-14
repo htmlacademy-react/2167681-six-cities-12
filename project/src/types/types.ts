@@ -46,15 +46,6 @@ export type Location = {
 	zoom: number;
  };
 
-export type Review = {
-	id: number;
-	avatar: string;
-	name: string;
-	rating: number;
-	date: Date;
-	discription: string;
-}
-
 export type Comment = {
 	comment: string;
 	date: Date;
@@ -64,6 +55,7 @@ export type Comment = {
 }
 
 export type userAuth = Pick<User, 'email'> & {password: string};
+export type commentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<protoOffer, 'id'>
 
 export type Sorting = keyof typeof SortName;
 

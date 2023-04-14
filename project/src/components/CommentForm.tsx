@@ -1,11 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState, ChangeEvent, Fragment } from 'react';
 import { STARS_COUNT } from '../utils/consts';
+import { FormEvent } from 'react';
+import { commentAuth } from '../types/types';
 
 
-function CommentForm(): JSX.Element {
+type FormProps = {
+	onSubmit: (formData: Omit<commentAuth, 'id'>) => void;
+ }
+
+function CommentForm({onSubmit}: FormProps): JSX.Element {
 
   const [comment, setComment] = useState<string>('');
-  const [rating, setRating] = useState<number | null>(null);
+  const [rating, setRating] = useState<number>(0);
 
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
@@ -15,8 +23,18 @@ function CommentForm(): JSX.Element {
     setRating(Number(evt.target.value));
   };
 
+  const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    onSubmit({
+      comment: comment,
+      rating
+
+    });
+  };
+
   return (
-    <form className="reviews__form form" action="#" method="post">
+    <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>
       <label className="reviews__label form__label" htmlFor="review">Your review</label>
       <div className="reviews__rating-form form__rating">
         { [...Array <number>(STARS_COUNT)].map((_, index) => (
@@ -51,7 +69,7 @@ function CommentForm(): JSX.Element {
         <p className="reviews__help">
 					To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" disabled>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" /* disabled */>Submit</button>
       </div>
     </form>
   );
