@@ -11,7 +11,7 @@ function Header (): JSX.Element {
   const favoriteOffers = useAppSelector((state) => state.offersPath.offers).filter((el) => el.isFavorite);
 
   return (
-    <>{/*  если пользователь авторизван */}
+    <>
       <header className="header">
         <div className="container">
           <div className="header__wrapper">
