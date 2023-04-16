@@ -15,6 +15,5 @@ export const redirect: Middleware<unknown, Reducer> =
       if (action.type === 'userRoutes/redirectNotFound') {
         browserHistory.push(action.payload);
       }
-
       return next(action);
     };

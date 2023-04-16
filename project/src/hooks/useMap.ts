@@ -30,7 +30,6 @@ function useMap(mapRef: MutableRefObject<HTMLElement | null>, city: City): Map |
 
     }
 
-
   }, [mapRef, map, city, location]);
 
   return map;

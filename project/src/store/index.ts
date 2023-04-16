@@ -15,5 +15,4 @@ export const store = configureStore({
   }).concat(redirect),
 });
 
-
 store.dispatch(fetchOffers());

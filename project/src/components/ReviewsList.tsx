@@ -14,5 +14,4 @@ function ReviewsList ({comments}: ReviewListProps): JSX.Element {
 
 }
 
-
 export default ReviewsList;

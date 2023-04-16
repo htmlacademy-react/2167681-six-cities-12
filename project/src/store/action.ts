@@ -5,7 +5,6 @@ import { saveToken } from '../services/token';
 import { AppRoute, ResponseCode, ApiRoutes } from '../utils/consts';
 import { AppDispatch } from '../types/state';
 
-
 type Extra = {
 	api: AxiosInstance;
 }

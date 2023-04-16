@@ -56,6 +56,5 @@ export type Comment = {
 
 export type userAuth = Pick<User, 'email'> & {password: string};
 export type commentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<protoOffer, 'id'>
-
 export type Sorting = keyof typeof SortName;
 

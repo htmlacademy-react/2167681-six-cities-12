@@ -3,10 +3,7 @@ import { City, protoOffer, Sorting, User, Comment} from './types';
 import { AuthorizationStatus } from '../utils/consts';
 
 export type State = ReturnType <typeof store.getState>;
-
-
 export type AppDispatch = typeof store.dispatch;
-
 
 export type Store = {
 	city: City;

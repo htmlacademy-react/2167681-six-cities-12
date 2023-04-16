@@ -1,12 +1,9 @@
-/* eslint-disable @typescript-eslint/no-unsafe-member-access */
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import { useState, ChangeEvent, Fragment } from 'react';
 import { STARS_COUNT } from '../utils/consts';
 import { FormEvent } from 'react';
 import { commentAuth } from '../types/types';
 
-
-type FormProps = {
+ type FormProps = {
 	onSubmit: (formData: Omit<commentAuth, 'id'>) => void;
  }
 
@@ -74,6 +71,5 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
     </form>
   );
 }
-
 
 export default CommentForm;

@@ -10,7 +10,6 @@ type offerProps = {
 	onMouseLeave?: () => void;
 }
 
-
 function Offer({
   offer,
   place,
@@ -22,17 +21,16 @@ function Offer({
     onMouseEnter(offer.id);
   };
 
-
   return (
     <article className={`${place}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
       {offer.isPremium &&
 				<div className="place-card__mark">
-				  <span>Premium</span>
+				   <span>Premium</span>
 				</div>}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
           <img className="place-card__image" src={offer.previewImage} width={ OfferPhotoSize.CommonWidth}
-			 height={ OfferPhotoSize.CommonHeight} alt="Place image"
+            height={ OfferPhotoSize.CommonHeight} alt="Place image"
           />
         </Link>
       </div>

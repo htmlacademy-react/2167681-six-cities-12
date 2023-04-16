@@ -1,9 +1,7 @@
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
-
 //import {filterOffers} from '../utils/util';
 import { useAppSelector } from '../hooks';
-
 
 function Favorites (): JSX.Element {
   const offers = useAppSelector((state) => state.offersPath.offers);

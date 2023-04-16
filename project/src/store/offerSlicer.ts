@@ -15,7 +15,6 @@ const initialState: Store = {
   isOfferLoading: false
 };
 
-
 const offerSlicer = createSlice({
   name: 'offers',
   initialState,

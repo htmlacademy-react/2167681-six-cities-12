@@ -6,5 +6,4 @@ function NotFound (): JSX.Element {
   );
 }
 
-
 export default NotFound;

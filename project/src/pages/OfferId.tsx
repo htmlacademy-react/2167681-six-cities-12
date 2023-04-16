@@ -1,5 +1,4 @@
-/* eslint-disable react/jsx-closing-tag-location */
-/* eslint-disable indent */
+/* eslint-disable no-mixed-spaces-and-tabs */
 import CommentForm from '../components/CommentForm';
 import ReviewsList from '../components/ReviewsList';
 import Map from '../components/Map';
@@ -12,7 +11,6 @@ import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet } from '.
 import { useEffect } from 'react';
 import Spinner from '../components/Spinner';
 import { commentAuth } from '../types/types';
-
 
 function OfferId (): JSX.Element |null {
   const params = useParams();
@@ -44,17 +42,15 @@ function OfferId (): JSX.Element |null {
   }
 
   const {id, city, title, type, description, bedrooms, price, host, images, maxAdults,
-   isPremium, goods, rating, location } = offer;
+    isPremium, goods, rating, location } = offer;
 
   const locations = nearbyOffers.map(({id: nearbyId, location: nearbyLocation}) => ({id: nearbyId, ...nearbyLocation}));
-	locations.push({id, ...location});
+  locations.push({id, ...location});
 
-
- const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
+  const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
 
     dispatch(postCommet({id, ...formData}));
- };
-
+  };
 
   return (
     <div>
@@ -67,8 +63,7 @@ function OfferId (): JSX.Element |null {
                   <div key={image} className="property__image-wrapper">
                     <img className="property__image" key={image} src={`${image}`} alt="Photo studio" />
                   </div>
-                )
-                ))
+                )))
               }
             </div>
           </div>
@@ -76,7 +71,7 @@ function OfferId (): JSX.Element |null {
             <div className="property__wrapper">
               {isPremium &&
 					<div className="property__mark">
-					<span>Premium</span>
+					  <span>Premium</span>
 					</div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
@@ -105,7 +100,7 @@ function OfferId (): JSX.Element |null {
                   {type}
                 </li>
                 <li className="property__feature property__feature--bedrooms">
-                 {bedrooms}
+                  {bedrooms}
                 </li>
                 <li className="property__feature property__feature--adults">
                   {maxAdults}
@@ -118,7 +113,7 @@ function OfferId (): JSX.Element |null {
               <div className="property__inside">
                 <h2 className="property__inside-title">What&apos;s inside</h2>
                 <ul className="property__inside-list">
-						{(goods.map((good) => ( <li key={good} className="property__inside-item">{good}</li>)))}
+                  {(goods.map((good) => ( <li key={good} className="property__inside-item">{good}</li>)))}
                 </ul>
               </div>
               <div className="property__host">
@@ -128,12 +123,12 @@ function OfferId (): JSX.Element |null {
                     <img className="property__avatar user__avatar" src="img/avatar-angelina.jpg" width="74" height="74" alt="Host avatar" />
                   </div>
                   <span className="property__user-name">
-                   {host.name}
+                    {host.name}
                   </span>
-						{host.isPro &&
+                  {host.isPro &&
 						<span className="property__user-status">
                     Pro
-                  </span>}
+						</span>}
                 </div>
                 <div className="property__description">
                   <p className="property__text">
@@ -154,7 +149,7 @@ function OfferId (): JSX.Element |null {
             </div>
           </div>
           {/* место для карты города (отображаются предложения по соседству) */}
-           <Map className={MapClassName.offerId} activeOfferId={id} coordinates={locations} city={city}/>
+          <Map className={MapClassName.offerId} activeOfferId={id} coordinates={locations} city={city}/>
         </section>
         <div className="container">
           <section className="near-places places">

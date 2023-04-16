@@ -18,13 +18,11 @@ const defaultCustomIcon = new Icon({
   iconAnchor: [20, 40]
 });
 
-
 const currentCustomIcon = new Icon({
   iconUrl: URL_MARKER_CURRENT,
   iconSize: [40, 40],
   iconAnchor: [20, 40]
 });
-
 
 function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
@@ -47,7 +45,6 @@ function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Elem
         markers.push(marker);
       });
 
-
       const { location} = city;
 
       map.setView({ lat:location.latitude, lng:location.longitude });
@@ -62,7 +59,6 @@ function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Elem
       }
     };
   }, [map, coordinates, city, activeOfferId]);
-
 
   return (
     <section ref={mapRef} className={`${className} map`} ></section>
