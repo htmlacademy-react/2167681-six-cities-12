@@ -1,5 +1,3 @@
-/* eslint-disable react/jsx-closing-bracket-location */
-/* eslint-disable no-mixed-spaces-and-tabs */
 import Offer from './Offer';
 import { MapClassName, OfferCardClassName} from '../utils/consts';
 import Map from './Map';
@@ -14,9 +12,7 @@ function FoundOffers(): JSX.Element {
   const currentSort = useAppSelector((state) => state.offersPath.sorting);
   const currentOffers = useAppSelector((state) => state.offersPath.offers.filter((offer) => offer.city.name === state.offersPath.city.name ).sort(sortingMethods[currentSort]));
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
-
   const onMouseEnterId = (id: number) => setActiveOffer(id);
-
   const onMouseLeave = () => setActiveOffer(null);
 
   return (
@@ -33,7 +29,7 @@ function FoundOffers(): JSX.Element {
             <>{/* контейнер с предложениями */}
               <h2 className="visually-hidden">Places</h2>
               <b className="places__found">{currentOffers.length} places to stay in {currentCity.name}</b>
-              	{/* меню с сортировками */}
+              {/* меню с сортировками */}
               <PlacesSorts />
               <div className="cities__places-list places__list tabs__content">
                 {/* Блок для карточек с недвижимостью */}
@@ -44,7 +40,7 @@ function FoundOffers(): JSX.Element {
         </section>
         <div className="cities__right-section">
           {currentOffers.length === 0 ?
-			 /* заставка пустого экрана */
+          /* заставка пустого экрана */
             <img className="no-places" src="img/no-places.png" alt="" /> :
           /* карта города */
             <Map activeOfferId={activeOffer} city={currentCity} coordinates={currentOffers.map(({id: idid, location: lolo}) => ( {id: idid, ...lolo}) )} className={MapClassName.main}/>}

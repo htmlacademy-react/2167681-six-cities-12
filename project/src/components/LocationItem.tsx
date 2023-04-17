@@ -8,7 +8,6 @@ type LocationProps = {
 	city: string;
 }
 
-
 function LocationItem ({city}: LocationProps): JSX.Element {
   const dispatch = useAppDispatch();
 
@@ -17,7 +16,6 @@ function LocationItem ({city}: LocationProps): JSX.Element {
     const x: City = {...currentCity[0]};
     return dispatch(setCity(x));
   };
-
 
   return (
     <li className="locations__item">

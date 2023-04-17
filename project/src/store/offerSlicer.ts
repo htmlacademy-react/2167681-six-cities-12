@@ -15,7 +15,6 @@ const initialState: Store = {
   isOfferLoading: false
 };
 
-
 const offerSlicer = createSlice({
   name: 'offers',
   initialState,
@@ -25,7 +24,8 @@ const offerSlicer = createSlice({
     },
     setCity: (state, action: PayloadAction<City>) => {
       state.city = action.payload;
-    }},
+    },
+  },
 
   extraReducers: (builder) => {
     builder

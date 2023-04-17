@@ -3,16 +3,12 @@ import LocationItem from '../components/LocationItem';
 import { Helmet } from 'react-helmet-async';
 import { cities } from '../utils/consts';
 
-
 function MainPage(): JSX.Element {
-
   return (
     <div className="page page--gray page--main">
-
       <Helmet>
         <title>6 Cities.Аренда жилья в Европе</title>
       </Helmet>
-
       <main className="page__main page__main--index">
         <h1 className="visually-hidden">Cities</h1>
         <div className="tabs">
@@ -28,6 +24,5 @@ function MainPage(): JSX.Element {
     </div>
   );
 }
-
 
 export default MainPage;

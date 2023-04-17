@@ -4,10 +4,8 @@ import { SortName } from '../utils/consts';
 import {useState} from 'react';
 import { setSort } from '../store/offerSlicer';
 
-
 function PlacesSorts(): JSX.Element {
   const currentSort = useAppSelector((state) => state.offersPath.sorting);
-
   const [sortList, setSortList] = useState<boolean>(false);
   const onSortListHidden = () => {
     setSortList(!sortList);
@@ -17,7 +15,6 @@ function PlacesSorts(): JSX.Element {
   const onSortTypeChange = (name: Sorting) => {
     dispatch(setSort(name));
   };
-
 
   return (
     <form className="places__sorting" action="#" method="get">

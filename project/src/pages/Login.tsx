@@ -11,22 +11,16 @@ function Login (): JSX.Element {
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
-
     const formData = new FormData(form) as Iterable<[userAuth]>;
-
     const data: userAuth = Object.fromEntries (formData); // Unsafe assignment of an `any` value.eslint@typescript-eslint/no-unsafe-assignment
-
     dispatch(fetchUserLogin(data));
   };
 
-
   return (
     <div className="page page--gray page--login">
-
       <Helmet>
         <title>6 Cities.Аренда жилья в Европе</title>
       </Helmet>
-
       <main className="page__main page__main--login">
         <div className="page__login-container container">
           <section className="login">
@@ -55,6 +49,5 @@ function Login (): JSX.Element {
     </div>
   );
 }
-
 
 export default Login;

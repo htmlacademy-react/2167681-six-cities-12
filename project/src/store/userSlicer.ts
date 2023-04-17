@@ -8,7 +8,6 @@ const initialState: UserPath = {
   user: ''
 };
 
-
 const userSlicer = createSlice({
   name: 'user-auth',
   initialState,
@@ -28,6 +27,5 @@ const userSlicer = createSlice({
       });
   }
 });
-
 
 export {userSlicer};

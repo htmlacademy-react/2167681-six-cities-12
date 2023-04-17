@@ -6,6 +6,5 @@ function LogoLink (): JSX.Element {
   );
 }
 
-
 export default LogoLink;
 
