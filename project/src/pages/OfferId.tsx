@@ -93,7 +93,7 @@ function OfferId (): JSX.Element |null {
                   </span>
                   <span className="visually-hidden">{rating}</span>
                 </div>
-                <span className="property__rating-value rating__value">rating</span>
+                <span className="property__rating-value rating__value">ываываываываывааыва</span>
               </div>
               <ul className="property__features">
                 <li className="property__feature property__feature--entire">

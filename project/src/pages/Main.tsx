@@ -4,6 +4,7 @@ import { Helmet } from 'react-helmet-async';
 import { cities } from '../utils/consts';
 
 function MainPage(): JSX.Element {
+
   return (
     <div className="page page--gray page--main">
       <Helmet>
