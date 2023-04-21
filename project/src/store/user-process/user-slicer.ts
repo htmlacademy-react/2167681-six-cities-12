@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { UserPath } from '../types/state';
-import { fetchUserLogin, fetchUserStatus, } from './action';
-import { AuthorizationStatus } from '../utils/consts';
+import { UserStore } from '../../types/state';
+import { fetchUserLogin, fetchUserStatus, } from '../action';
+import { AuthorizationStatus, StoreSliceName } from '../../utils/consts';
 
-const initialState: UserPath = {
+const initialState: UserStore = {
   authorizationStatus: AuthorizationStatus.Unknown,
   user: ''
 };
 
 const userSlicer = createSlice({
-  name: 'user-auth',
+  name: StoreSliceName.UserProcess,
   initialState,
   reducers: {},
   extraReducers(builder) {

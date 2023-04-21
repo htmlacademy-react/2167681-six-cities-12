@@ -1,13 +1,11 @@
-import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import {City, Sorting} from '../types/types';
-import { fetchNearbyOffers, fetchOffer, fetchOfferComments, fetchOffers} from './action';
-import { SortName, cities } from '../utils/consts';
-import { Store } from '../types/state';
+import { createSlice } from '@reduxjs/toolkit';
+import { StoreSliceName } from '../../utils/consts';
+import { DataStore } from '../../types/state';
+import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers } from '../action';
 
-const initialState: Store = {
-  city: cities[0],
+// получение и отправка комментария/ получение оффера, ближайших, всех офферов
+const initialState: DataStore = {
   offers: [],
-  sorting: SortName.Popular,
   isOffersLoading: false,
   offer: null,
   nearbyOffers:[],
@@ -15,21 +13,13 @@ const initialState: Store = {
   isOfferLoading: false
 };
 
-const offerSlicer = createSlice({
-  name: 'offers',
+const dataSlicer = createSlice({
+  name: StoreSliceName.DataProcess,
   initialState,
-  reducers:{
-    setSort: (state, action: PayloadAction<Sorting>) => {
-      state.sorting = action.payload;
-    },
-    setCity: (state, action: PayloadAction<City>) => {
-      state.city = action.payload;
-    },
-  },
-
+  reducers:{},
   extraReducers: (builder) => {
     builder
-    // массив предложениий
+      // массив предложениий
       .addCase(fetchOffers.pending, (state, action) => {
         state.isOffersLoading = true;
       })
@@ -40,7 +30,7 @@ const offerSlicer = createSlice({
       .addCase(fetchOffers.rejected, (state, action) => {
         state.isOffersLoading = false;
       })
-    // одно предложение
+      // одно предложение
       .addCase(fetchOffer.pending, (state, action) => {
         state.isOfferLoading = true;
       })
@@ -51,18 +41,16 @@ const offerSlicer = createSlice({
       .addCase(fetchOffer.rejected, (state, action) => {
         state.isOfferLoading = false;
       })
-    // предложения по соседству
+      // предложения по соседству
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
 
       })
-    //комментарии
+      //комментарии
       .addCase(fetchOfferComments.fulfilled, (state, action) => {
         state.comments = action.payload;
       });
   }
 });
 
-export const {setSort, setCity} = offerSlicer.actions;
-
-export { offerSlicer };
+export {dataSlicer};

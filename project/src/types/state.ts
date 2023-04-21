@@ -5,10 +5,8 @@ import { AuthorizationStatus } from '../utils/consts';
 export type State = ReturnType <typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export type Store = {
-	city: City;
+export type DataStore = {
 	offers: protoOffer[];
-	sorting: Sorting;
 	isOffersLoading: boolean;
 	isOfferLoading: boolean;
 	offer: protoOffer | null;
@@ -16,8 +14,12 @@ export type Store = {
 	comments: Comment[];
  }
 
-export type UserPath = {
+export type UserStore = {
 	authorizationStatus: AuthorizationStatus;
 	user: User['email'];
  }
 
+export type SiteStore = {
+	city: City;
+	sorting: Sorting;
+}

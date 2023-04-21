@@ -1,7 +1,8 @@
 import { cities } from '../utils/consts';
-import { useAppDispatch } from '../hooks';
-import { setCity } from '../store/offerSlicer';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { setCity } from '../store/site-process/site-silecer';
 import { City } from '../types/types';
+import { getCity } from '../store/site-process/site-selector';
 // Кнопка с названием города (для поиска предложений)
 
 type LocationProps = {
@@ -10,6 +11,7 @@ type LocationProps = {
 
 function LocationItem ({city}: LocationProps): JSX.Element {
   const dispatch = useAppDispatch();
+  const activeCity = useAppSelector(getCity);
 
   const handleCurrentCity = () => {
     const currentCity = (cities.filter((el) => el.name === city ));
@@ -19,7 +21,7 @@ function LocationItem ({city}: LocationProps): JSX.Element {
 
   return (
     <li className="locations__item">
-      <a className="locations__item-link tabs__item" href="#" onClick={() => handleCurrentCity()}>
+      <a className={`locations__item-link tabs__item ${activeCity.name === city ? 'tabs__item--active' : '' }`} href="#" onClick={() => handleCurrentCity()}>
         <span>{city}</span>
       </a>
     </li>

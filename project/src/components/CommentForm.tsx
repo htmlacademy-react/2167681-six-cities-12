@@ -8,7 +8,6 @@ import { commentAuth } from '../types/types';
  }
 
 function CommentForm({onSubmit}: FormProps): JSX.Element {
-
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
@@ -25,8 +24,7 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
 
     onSubmit({
       comment: comment,
-      rating
-
+      rating,
     });
   };
 
