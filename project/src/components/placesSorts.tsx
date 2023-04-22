@@ -1,33 +1,29 @@
 import { Sorting } from '../types/types';
 import { useAppSelector, useAppDispatch } from '../hooks';
 import { SortName } from '../utils/consts';
-import {memo, useCallback, useState} from 'react';
+import { useState} from 'react';
 import { setSort } from '../store/site-process/site-silecer';
 import { getSort } from '../store/site-process/site-selector';
+import SortItem from './SortItem';
 
 function PlacesSorts(): JSX.Element {
   const currentSort = useAppSelector(getSort);
   const [sortList, setSortList] = useState<boolean>(false);
-  const onSortListHidden = useCallback( () => {
+
+  const onSortListHidden = () => {
     setSortList(!sortList);
-  }, [sortList]);
+  };
 
   const dispatch = useAppDispatch();
-  const onSortTypeChange = useCallback((name: Sorting) => {
-    dispatch(setSort(name));
-  }, [dispatch]);
 
-  const renderSortItems = useCallback(() =>
+  const onSortTypeChange = (name: Sorting) => {
+    dispatch(setSort(name));
+  };
+
+  const renderSortItems = () =>
     (Object.entries(SortName) as [Sorting, SortName][]).map(([name, info]) =>
-      (
-        <li key={name}
-          onClick={() => {
-            onSortTypeChange(name);
-            onSortListHidden();
-          }} className={`places__option ${name === currentSort ? 'places__option--active' : ''}`} tabIndex={0}
-        >{info}
-        </li>)
-    ), [onSortTypeChange, onSortListHidden, currentSort]);
+      <SortItem key={name} info={info} name={name} onSortListHidden={onSortListHidden} onSortTypeChange={onSortTypeChange}/>
+    );
 
 
   return (
@@ -44,4 +40,4 @@ function PlacesSorts(): JSX.Element {
   );
 }
 // мемо ради мемо
-export default memo(PlacesSorts);
+export default PlacesSorts;

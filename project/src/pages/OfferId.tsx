@@ -36,7 +36,7 @@ function OfferId (): JSX.Element |null {
       dispatch(fetchOfferComments(parsedId));
     }
 
-  }, [params, dispatch,]);
+  }, [params, dispatch]);
 
   if (!offer) {
     return null;
@@ -55,6 +55,7 @@ function OfferId (): JSX.Element |null {
 
   const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
     dispatch(postCommet({id, ...formData}));
+    dispatch(fetchOfferComments(id));
   };
 
   return (

@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from '../hooks';
 import { setCity } from '../store/site-process/site-silecer';
 import { City } from '../types/types';
 import { getCity } from '../store/site-process/site-selector';
+import { useCallback } from 'react';
 // Кнопка с названием города (для поиска предложений)
 
 type LocationProps = {
@@ -13,11 +14,12 @@ function LocationItem ({city}: LocationProps): JSX.Element {
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector(getCity);
 
-  const handleCurrentCity = () => {
+  const handleCurrentCity = useCallback(() => {
     const currentCity = (cities.filter((el) => el.name === city ));
     const x: City = {...currentCity[0]};
-    return dispatch(setCity(x));
-  };
+
+    return dispatch(setCity(x));}, [dispatch]);
+
 
   return (
     <li className="locations__item">
