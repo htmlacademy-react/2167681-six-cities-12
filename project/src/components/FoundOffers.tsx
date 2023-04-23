@@ -3,17 +3,24 @@ import { MapClassName, OfferCardClassName} from '../utils/consts';
 import Map from './Map';
 import { useAppSelector} from '../hooks';
 import PlacesSorts from './placesSorts';
-import { sortingMethods } from '../utils/consts';
-import { useState } from 'react';
+import { useState, useMemo} from 'react';
+import { offerSelector } from '../store/data-process/data-selector';
+import { getCity,} from '../store/site-process/site-selector';
+import { protoOffer } from '../types/types';
 
 function FoundOffers(): JSX.Element {
 
-  const currentCity = useAppSelector((state) => state.offersPath.city);
-  const currentSort = useAppSelector((state) => state.offersPath.sorting);
-  const currentOffers = useAppSelector((state) => state.offersPath.offers.filter((offer) => offer.city.name === state.offersPath.city.name ).sort(sortingMethods[currentSort]));
+  const currentCity = useAppSelector(getCity);
+  const currentOffers: protoOffer[] | null = useAppSelector(offerSelector);
+  const locations = currentOffers.map(({id: idOffer, location: locationOffer}) => ( {id: idOffer, ...locationOffer}));
   const [activeOffer, setActiveOffer] = useState<number | null>(null);
   const onMouseEnterId = (id: number) => setActiveOffer(id);
   const onMouseLeave = () => setActiveOffer(null);
+
+  const renderOffers = useMemo(() => {
+    const offers = currentOffers.map((el) => <Offer onMouseEnter={onMouseEnterId} onMouseLeave={onMouseLeave} key={el.id} offer={el} place={OfferCardClassName.main}/>);
+    return offers;
+  }, [currentOffers]);
 
   return (
     <div className="cities">
@@ -33,8 +40,7 @@ function FoundOffers(): JSX.Element {
               <PlacesSorts />
               <div className="cities__places-list places__list tabs__content">
                 {/* Блок для карточек с недвижимостью */}
-                {currentOffers.map((el) => (<Offer onMouseEnter={onMouseEnterId} onMouseLeave={onMouseLeave} key={el.id} offer={el} place={OfferCardClassName.main}/>
-                ))}
+                {renderOffers}
               </div>
             </>}
         </section>
@@ -43,11 +49,10 @@ function FoundOffers(): JSX.Element {
           /* заставка пустого экрана */
             <img className="no-places" src="img/no-places.png" alt="" /> :
           /* карта города */
-            <Map activeOfferId={activeOffer} city={currentCity} coordinates={currentOffers.map(({id: idid, location: lolo}) => ( {id: idid, ...lolo}) )} className={MapClassName.main}/>}
+            <Map activeOfferId={activeOffer} city={currentCity} coordinates={locations} className={MapClassName.main}/>}
         </div>
       </div>
     </div>);
-
 }
 
 export default FoundOffers;

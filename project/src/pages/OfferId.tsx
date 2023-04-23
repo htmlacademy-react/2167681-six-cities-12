@@ -8,18 +8,23 @@ import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH, AuthorizationStatus} from '../uti
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useParams } from 'react-router-dom';
 import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet } from '../store/action';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import Spinner from '../components/Spinner';
-import { commentAuth } from '../types/types';
+import { commentAuth, Comment } from '../types/types';
+import { getOffer, getIsOfferLoading, getNearbyOffers, getComments } from '../store/data-process/data-selector';
+import { getUserStatus } from '../store/user-process/user-selector';
 
 function OfferId (): JSX.Element |null {
   const params = useParams();
   const dispatch = useAppDispatch();
-  const offer = useAppSelector((state) => state.offersPath.offer);
-  const isOfferLoading = useAppSelector((state) => state.offersPath.isOfferLoading);
-  const nearbyOffers = useAppSelector((state) => state.offersPath.nearbyOffers);
-  const comments = useAppSelector((state) => state.offersPath.comments);
-  const authorizationStatus = useAppSelector((state) => state.userAuthPath.authorizationStatus);
+  const offer = useAppSelector(getOffer);
+  const isOfferLoading = useAppSelector(getIsOfferLoading);
+  const nearbyOffers = useAppSelector(getNearbyOffers);
+  const comments = useAppSelector(getComments);
+  const authorizationStatus = useAppSelector(getUserStatus);
+  const commentsRef = useRef<Comment[]>();
+
+  commentsRef.current = comments;
 
   useEffect(() => {
     const {id} = params;
@@ -41,6 +46,7 @@ function OfferId (): JSX.Element |null {
     return <Spinner/>;
   }
 
+
   const {id, city, title, type, description, bedrooms, price, host, images, maxAdults,
     isPremium, goods, rating, location } = offer;
 
@@ -48,8 +54,8 @@ function OfferId (): JSX.Element |null {
   locations.push({id, ...location});
 
   const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
-
     dispatch(postCommet({id, ...formData}));
+    dispatch(fetchOfferComments(id));
   };
 
   return (
@@ -71,7 +77,7 @@ function OfferId (): JSX.Element |null {
             <div className="property__wrapper">
               {isPremium &&
 					<div className="property__mark">
-					  <span>Premium</span>
+					  <span >Premium</span>
 					</div>}
               <div className="property__name-wrapper">
                 <h1 className="property__name">
@@ -81,7 +87,7 @@ function OfferId (): JSX.Element |null {
                   <svg className="property__bookmark-icon" width="31" height="33">
                     <use xlinkHref="#icon-bookmark"></use>
                   </svg>
-                  <span className="visually-hidden">To bookmarks</span>
+                  <span className="visually-hidden" >To bookmarks</span>
                 </button>
               </div>
               <div className="property__rating rating">
@@ -140,7 +146,7 @@ function OfferId (): JSX.Element |null {
               </div>
               <section className="property__reviews reviews">
                 {/* Лист с комментариями */}
-                <ReviewsList comments={comments} />
+                <ReviewsList comments={commentsRef.current} />
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
                 { authorizationStatus === AuthorizationStatus.Auth &&

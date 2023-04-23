@@ -26,8 +26,8 @@ const currentCustomIcon = new Icon({
 
 function Map ({city, coordinates, className, activeOfferId}: MapProps): JSX.Element {
   const mapRef = useRef(null);
-
   const map = useMap(mapRef, city);
+
   useEffect(() => {
 
     const markers: Marker[] = [];

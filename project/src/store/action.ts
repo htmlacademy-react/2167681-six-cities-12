@@ -76,8 +76,8 @@ export const postCommet = createAsyncThunk<Comment[], commentAuth, {extra: Extra
     const {data} = await api.post<Comment[]>(`${ApiRoutes.Comments}/${id}`, {comment, rating});
 
     return data;
-  }
-);
+  });
+
 
 // запросы аторизации
 export const fetchUserStatus = createAsyncThunk<User, undefined, {extra: Extra}>(
@@ -87,8 +87,7 @@ export const fetchUserStatus = createAsyncThunk<User, undefined, {extra: Extra}>
     const {data} = await api.get<User>(ApiRoutes.Login);
 
     return data;
-  }
-);
+  });
 
 export const fetchUserLogin = createAsyncThunk<userAuth['email'], userAuth, {
 	extra:Extra ;
@@ -104,7 +103,6 @@ export const fetchUserLogin = createAsyncThunk<userAuth['email'], userAuth, {
         dispatch(redirectTo(AppRoute.Main));
 
         return email;
-      }
-    );
+      });
 
 

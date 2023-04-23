@@ -8,7 +8,6 @@ export type User = {
 	token: string;
 	email: string;
 }
-
 // Шаблон предложения аренды
 export type protoOffer = {
 	id: number;

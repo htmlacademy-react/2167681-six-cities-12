@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import { memo } from 'react';
 import { protoOffer} from '../types/types';
 import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
@@ -66,4 +67,4 @@ function Offer({
   );
 }
 
-export default Offer;
+export default memo(Offer);

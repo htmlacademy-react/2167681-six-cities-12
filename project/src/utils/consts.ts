@@ -118,6 +118,12 @@ export enum ApiMethods {
 
 }
 
+export enum StoreSliceName {
+  DataProcess = 'DATA-PROCESS',
+  SiteProcess = 'SITE-PROCESS',
+  UserProcess = 'USER-PROCESS'
+}
+
 export const cities: City [] = [
   {
     name: 'Paris',
