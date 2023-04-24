@@ -7,12 +7,13 @@ import Offer from '../components/Offer';
 import { STARS_COUNT, MAX_PERCENT_STARS_WIDTH, AuthorizationStatus} from '../utils/consts';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { useParams } from 'react-router-dom';
-import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet } from '../store/action';
-import { useEffect, useRef } from 'react';
+import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet} from '../store/action';
+import { useEffect} from 'react';
 import Spinner from '../components/Spinner';
-import { commentAuth, Comment } from '../types/types';
+import { commentAuth} from '../types/types';
 import { getOffer, getIsOfferLoading, getNearbyOffers, getComments } from '../store/data-process/data-selector';
 import { getUserStatus } from '../store/user-process/user-selector';
+import BookMarkButton from '../components/BookmarkButton';
 
 function OfferId (): JSX.Element |null {
   const params = useParams();
@@ -22,10 +23,19 @@ function OfferId (): JSX.Element |null {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getUserStatus);
-  const commentsRef = useRef<Comment[]>();
+  /*   const [scroll, setScroll] = useState(0);
 
-  commentsRef.current = comments;
+  const handleScroll = () => setScroll(window.scrollY);
 
+  const handleSaveScroll = () => window.scrollTo(0, scroll);
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+ */
   useEffect(() => {
     const {id} = params;
 
@@ -46,7 +56,6 @@ function OfferId (): JSX.Element |null {
     return <Spinner/>;
   }
 
-
   const {id, city, title, type, description, bedrooms, price, host, images, maxAdults,
     isPremium, goods, rating, location } = offer;
 
@@ -58,6 +67,11 @@ function OfferId (): JSX.Element |null {
     dispatch(fetchOfferComments(id));
   };
 
+  const favoriteData = {
+    id: offer.id,
+    isFavorite: offer.isFavorite
+  };
+
   return (
     <div>
       <main className="page__main page__main--property">
@@ -67,7 +81,7 @@ function OfferId (): JSX.Element |null {
               {
                 (images.slice(0,6).map((image) => (
                   <div key={image} className="property__image-wrapper">
-                    <img className="property__image" key={image} src={`${image}`} alt="Photo studio" />
+                    <img className="property__image" key={image} src={`${image}`} alt="studio" />
                   </div>
                 )))
               }
@@ -83,12 +97,7 @@ function OfferId (): JSX.Element |null {
                 <h1 className="property__name">
                   {title}
                 </h1>
-                <button className="property__bookmark-button button" type="button">
-                  <svg className="property__bookmark-icon" width="31" height="33">
-                    <use xlinkHref="#icon-bookmark"></use>
-                  </svg>
-                  <span className="visually-hidden" >To bookmarks</span>
-                </button>
+                <BookMarkButton changeStatus={favoriteData} type='property'/>
               </div>
               <div className="property__rating rating">
                 <div className="property__stars rating__stars">
@@ -146,7 +155,7 @@ function OfferId (): JSX.Element |null {
               </div>
               <section className="property__reviews reviews">
                 {/* Лист с комментариями */}
-                <ReviewsList comments={commentsRef.current} />
+                <ReviewsList comments={comments} />
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
                 { authorizationStatus === AuthorizationStatus.Auth &&

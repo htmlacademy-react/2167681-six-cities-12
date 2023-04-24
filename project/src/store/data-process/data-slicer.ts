@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { StoreSliceName } from '../../utils/consts';
 import { DataStore } from '../../types/state';
-import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers } from '../action';
+import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers, fetchFavoriteOffers } from '../action';
 
 // получение и отправка комментария/ получение оффера, ближайших, всех офферов
 const initialState: DataStore = {
@@ -10,7 +10,8 @@ const initialState: DataStore = {
   offer: null,
   nearbyOffers:[],
   comments: [],
-  isOfferLoading: false
+  isOfferLoading: false,
+  favorites: []
 };
 
 const dataSlicer = createSlice({
@@ -20,25 +21,25 @@ const dataSlicer = createSlice({
   extraReducers: (builder) => {
     builder
       // массив предложениий
-      .addCase(fetchOffers.pending, (state, action) => {
+      .addCase(fetchOffers.pending, (state) => {
         state.isOffersLoading = true;
       })
       .addCase(fetchOffers.fulfilled, (state, action) => {
         state.offers = action.payload;
         state.isOffersLoading = false;
       })
-      .addCase(fetchOffers.rejected, (state, action) => {
+      .addCase(fetchOffers.rejected, (state) => {
         state.isOffersLoading = false;
       })
       // одно предложение
-      .addCase(fetchOffer.pending, (state, action) => {
+      .addCase(fetchOffer.pending, (state) => {
         state.isOfferLoading = true;
       })
       .addCase(fetchOffer.fulfilled, (state, action) => {
         state.offer = action.payload;
         state.isOfferLoading = false;
       })
-      .addCase(fetchOffer.rejected, (state, action) => {
+      .addCase(fetchOffer.rejected, (state) => {
         state.isOfferLoading = false;
       })
       // предложения по соседству
@@ -49,6 +50,9 @@ const dataSlicer = createSlice({
       //комментарии
       .addCase(fetchOfferComments.fulfilled, (state, action) => {
         state.comments = action.payload;
+      })
+      .addCase(fetchFavoriteOffers.fulfilled, (state, action) =>{
+        state.favorites = action.payload;
       });
   }
 });

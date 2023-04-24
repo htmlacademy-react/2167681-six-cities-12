@@ -3,10 +3,12 @@ import { memo } from 'react';
 import { protoOffer} from '../types/types';
 import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
+import BookMarkButton from './BookmarkButton';
+
 
 type offerProps = {
-	place: OfferCardClassName;
 	offer: protoOffer;
+	place: OfferCardClassName;
 	onMouseEnter?: (id: number) => void;
 	onMouseLeave?: () => void;
 }
@@ -22,6 +24,12 @@ function Offer({
     onMouseEnter(offer.id);
   };
 
+  const favoritesData = {
+    id: offer.id,
+    isFavorite: offer.isFavorite
+  };
+
+
   return (
     <article className={`${place}__card place-card`} onMouseEnter={handleMouseEnter} onMouseLeave={onMouseLeave}>
       {offer.isPremium &&
@@ -30,8 +38,8 @@ function Offer({
 				</div>}
       <div className={`${place}__image-wrapper place-card__image-wrapper`}>
         <Link to={`${AppRoute.Offer}/${offer.id}`}>
-          <img className="place-card__image" src={offer.previewImage} width={ OfferPhotoSize.CommonWidth}
-            height={ OfferPhotoSize.CommonHeight} alt="Place image"
+          <img className="place-card__image" src={offer.previewImage} width={OfferPhotoSize.CommonWidth}
+            height={ OfferPhotoSize.CommonHeight} alt="Place"
           />
         </Link>
       </div>
@@ -41,12 +49,7 @@ function Offer({
             <b className="place-card__price-value">&euro;{offer.price}</b>
             <span className="place-card__price-text">&#47;&nbsp;night</span>
           </div>
-          <button className={`place-card__bookmark-button ${offer.isFavorite ? 'place-card__bookmark-button--active' : ''} button`} type="button">
-            <svg className="place-card__bookmark-icon" width="18" height="19">
-              <use xlinkHref="#icon-bookmark"></use>
-            </svg>
-            <span className="visually-hidden">In bookmarks</span>
-          </button>
+          <BookMarkButton changeStatus={favoritesData} type='thumbnails'/>
         </div>
         <div className="place-card__rating rating">
           <div className="place-card__stars rating__stars">

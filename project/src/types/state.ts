@@ -12,6 +12,7 @@ export type DataStore = {
 	offer: protoOffer | null;
 	nearbyOffers: protoOffer[];
 	comments: Comment[];
+	favorites: protoOffer[];
  }
 
 export type UserStore = {

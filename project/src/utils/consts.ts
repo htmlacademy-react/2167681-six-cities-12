@@ -14,14 +14,28 @@ export const sortingMethods: {
   TopRatedFirst: (a, b) => a.rating - b.rating,
 };
 
+export const BookMarkTypeParams = {
+  offerId: {
+    width: 31,
+    height: 33
+  },
+  thumbnails: {
+    width: 18,
+    height: 19
+  }
+};
+
+
 export enum ApiRoutes {
 	Offers = '/hotels',
 	Comments = '/comments',
-	Login = '/login'
+	Login = '/login',
+  Favorites = '/favorite'
 }
 
 export enum ResponseCode {
-	NotFound = 404
+	NotFound = 404,
+  NoAuth = 401,
 }
 
 export enum MapClassName {
@@ -75,11 +89,6 @@ export enum SortName {
 	DecreasingPrice = 'Price: high to low',
 	TopRatedFirst = 'Top rated first'
 }
-
-//Города находятся на панели навигации
-export const CatalogCity: string[] = [
-  'Paris', 'Cologne', 'Amsterdam', 'Hamburg', 'Dusseldorf', 'Brussels',
-];
 
 export enum CurrentOfferKey {
 	Images = 'images',

@@ -11,6 +11,8 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
+  const onSubmitDisabled = () => !!(comment === '' || rating === 0);
+
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
   };
@@ -26,6 +28,9 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
       comment: comment,
       rating,
     });
+
+    setComment('');
+    setRating(0);
   };
 
   return (
@@ -64,7 +69,7 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
         <p className="reviews__help">
 					To submit review please make sure to set <span className="reviews__star">rating</span> and describe your stay with at least <b className="reviews__text-amount">50 characters</b>.
         </p>
-        <button className="reviews__submit form__submit button" type="submit" /* disabled */>Submit</button>
+        <button className="reviews__submit form__submit button" type="submit" disabled={onSubmitDisabled()}>Submit</button>
       </div>
     </form>
   );
