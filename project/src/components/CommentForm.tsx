@@ -11,7 +11,7 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
-  const onSubmitDisabled = () => !!(comment === '' || rating === 0);
+  const onSubmitDisabled = () => !!((comment.length < 50 || comment.length > 300) || rating === 0);
 
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);

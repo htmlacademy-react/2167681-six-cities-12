@@ -1,19 +1,15 @@
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
-import { useAppSelector, useAppDispatch } from '../hooks';
+import { useAppSelector } from '../hooks';
 import { getFavorite } from '../store/data-process/data-selector';
 import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { City } from '../types/types';
-import { fetchFavoriteOffers } from '../store/action';
 
 function Favorites (): JSX.Element {
+
   const favoritesOffers = useAppSelector(getFavorite);
   const sortOffersToContainers = (city: City['name']) => favoritesOffers.filter((el) => el.city.name === city);
   const currentContainers = new Set(favoritesOffers.map((el) => el.city.name));
-  const dispatch = useAppDispatch();
-
-  dispatch(fetchFavoriteOffers);
-
 
   return (
     <>
@@ -35,7 +31,7 @@ function Favorites (): JSX.Element {
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
                 {
-                  [...currentContainers].map((el) => (
+                  Array.from(currentContainers).map((el) => (
                     <FavoritesLocationContainer
                       key={el}
                       offers={sortOffersToContainers(el)}
