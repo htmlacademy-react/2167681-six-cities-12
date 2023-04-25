@@ -64,7 +64,6 @@ function OfferId (): JSX.Element |null {
 
   const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
     dispatch(postCommet({id, ...formData}));
-    dispatch(fetchOfferComments(id));
   };
 
   const favoriteData = {

@@ -14,6 +14,7 @@ export const getComments = ({[StoreSliceName.DataProcess]: SITE_DATA}: State): C
 export const getNearbyOffers = ({[StoreSliceName.DataProcess]: SITE_DATA}: State): protoOffer[] => SITE_DATA.nearbyOffers;
 
 export const getFavorite = ({[StoreSliceName.DataProcess]: SITE_DATA}: State): protoOffer[] => SITE_DATA.favorites;
+export const getIsFavoritesLoading = ({[StoreSliceName.DataProcess]: SITE_DATA}: State): boolean => SITE_DATA.isFavoritesLoading;
 
 export const offerSelector = createSelector(
   [getOffers, getCity, getSort],

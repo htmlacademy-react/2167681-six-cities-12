@@ -120,7 +120,7 @@ export const postFavoriteOffer = createAsyncThunk<protoOffer, favorireStatus, {
   extra: Extra;
   dispatch: AppDispatch;
 }>(
-  Action.FETCH_FAVORITES,
+  Action.POST_FAVOTIRE,
   async ({id, isFavorite}, {extra, dispatch}) => {
     const status = isFavorite ? 0 : 1;
     const { api } = extra;

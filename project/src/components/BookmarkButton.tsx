@@ -1,8 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchOffer, fetchOffers, postFavoriteOffer, fetchFavoriteOffers, fetchNearbyOffers } from '../store/action';
+import { useAppDispatch } from '../hooks';
+import { postFavoriteOffer } from '../store/action';
 import type { favorireStatus } from '../types/types';
-import { getOffer } from '../store/data-process/data-selector';
-
 
 type BookMarkButtonProps = {
     type: 'thumbnails' | 'property';
@@ -11,18 +9,10 @@ type BookMarkButtonProps = {
 
 function BookMarkButton ({type, changeStatus}: BookMarkButtonProps):JSX.Element {
   const dispatch = useAppDispatch();
-  const offer = useAppSelector(getOffer);
+
 
   const handleChangeStatus = () =>{
     dispatch(postFavoriteOffer(changeStatus));
-    dispatch(fetchOffers());
-    dispatch(fetchOffer(changeStatus.id));
-    dispatch(fetchFavoriteOffers());
-
-    if (offer) {
-      dispatch(fetchNearbyOffers(offer.id));
-    }
-
   };
 
   return (

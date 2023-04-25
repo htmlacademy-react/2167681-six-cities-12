@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { StoreSliceName } from '../../utils/consts';
 import { DataStore } from '../../types/state';
-import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers, fetchFavoriteOffers } from '../action';
+import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers, fetchFavoriteOffers, postCommet, postFavoriteOffer } from '../action';
 
 // получение и отправка комментария/ получение оффера, ближайших, всех офферов
 const initialState: DataStore = {
@@ -11,6 +11,7 @@ const initialState: DataStore = {
   nearbyOffers:[],
   comments: [],
   isOfferLoading: false,
+  isFavoritesLoading: false,
   favorites: []
 };
 
@@ -45,14 +46,39 @@ const dataSlicer = createSlice({
       // предложения по соседству
       .addCase(fetchNearbyOffers.fulfilled, (state, action) => {
         state.nearbyOffers = action.payload;
-
       })
       //комментарии
       .addCase(fetchOfferComments.fulfilled, (state, action) => {
         state.comments = action.payload;
       })
-      .addCase(fetchFavoriteOffers.fulfilled, (state, action) =>{
+      .addCase(postCommet.fulfilled, (state, action) => {
+        state.comments = action.payload;
+      })
+      // "избранное"
+      .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
         state.favorites = action.payload;
+        state.isFavoritesLoading = false;
+      })
+      .addCase(fetchFavoriteOffers.pending, (state) => {
+        state.isFavoritesLoading = true;
+      })
+      .addCase(fetchFavoriteOffers.rejected, (state) => {
+        state.isFavoritesLoading = false;
+      })
+      .addCase(postFavoriteOffer.fulfilled, (state, action) => {
+        const updatedOffer = action.payload;
+        state.offers = state.offers.map((offer) => offer.id === updatedOffer.id ? updatedOffer : offer);
+        if (state.offer && state.offer.id === updatedOffer.id) {
+          state.offer = updatedOffer;
+        }
+        if (updatedOffer.isFavorite) {
+          state.favorites = state.favorites.concat(updatedOffer);
+        } else {
+          state.favorites = state.favorites.filter((favoriteOffer) => favoriteOffer.id !== updatedOffer.id);
+        }
+        if (state.nearbyOffers) {
+          state.nearbyOffers = state.nearbyOffers.map((offer) => offer.id === updatedOffer.id ? updatedOffer : offer);
+        }
       });
   }
 });
