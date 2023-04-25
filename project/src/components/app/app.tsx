@@ -3,7 +3,7 @@ import Favorites from '../../pages/Favorites';
 import Header from '../Header';
 import PrivateRoute from '../privateRoute';
 import Login from '../../pages/Login';
-import { BrowserRouter, Routes, Route, } from 'react-router-dom';
+import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import NotFound from '../NotFound';
 import { AppRoute } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';

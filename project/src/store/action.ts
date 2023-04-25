@@ -1,5 +1,5 @@
 import { createAction, createAsyncThunk } from '@reduxjs/toolkit';
-import { protoOffer, Comment, User, userAuth, commentAuth} from '../types/types';
+import { protoOffer, Comment, User, userAuth, commentAuth, favorireStatus} from '../types/types';
 import type {AxiosInstance, AxiosError} from 'axios';
 import { saveToken } from '../services/token';
 import { AppRoute, ResponseCode, ApiRoutes } from '../utils/consts';
@@ -14,9 +14,11 @@ export const Action = {
   FETCH_OFFER: 'offer/fetch',
   FETCH_NEARBY_OFFERS: 'nearbyOffers/fetch',
   FETCH_OFFER_COMMENTS: 'comments/fetch',
-  FETCH_USER_STATUS: 'userStatus/fetch',
-  FETCH_USER_LOGIN: 'userLogin/fetch',
-  POST_COMMENT: 'userComment/fetch',
+  FETCH_USER_STATUS: 'user/status',
+  FETCH_USER_LOGIN: 'user/login',
+  POST_COMMENT: 'user/postComment',
+  FETCH_FAVORITES: 'favorites/fetch',
+  POST_FAVOTIRE: 'favorite/post',
 };
 
 export const redirectTo = createAction<AppRoute>('userRoutes/redirect');
@@ -78,7 +80,6 @@ export const postCommet = createAsyncThunk<Comment[], commentAuth, {extra: Extra
     return data;
   });
 
-
 // запросы аторизации
 export const fetchUserStatus = createAsyncThunk<User, undefined, {extra: Extra}>(
   Action.FETCH_USER_STATUS,
@@ -105,4 +106,37 @@ export const fetchUserLogin = createAsyncThunk<userAuth['email'], userAuth, {
         return email;
       });
 
+// запросы с "избранными"
+export const fetchFavoriteOffers = createAsyncThunk<protoOffer[], undefined, {extra: Extra}>(
+  Action.FETCH_FAVORITES,
+  async (_, {extra}) => {
+    const { api } = extra;
+    const {data} = await api.get<protoOffer[]>(ApiRoutes.Favorites);
 
+    return data;
+  });
+
+export const postFavoriteOffer = createAsyncThunk<protoOffer, favorireStatus, {
+  extra: Extra;
+  dispatch: AppDispatch;
+}>(
+  Action.POST_FAVOTIRE,
+  async ({id, isFavorite}, {extra, dispatch}) => {
+    const status = isFavorite ? 0 : 1;
+    const { api } = extra;
+
+    try {
+
+      const {data} = await api.post<protoOffer>(`${ApiRoutes.Favorites}/${id}/${status}`);
+
+      return data;
+
+    } catch (error) {
+      const axiosError = error as AxiosError;
+
+      if(axiosError.response?.status === ResponseCode.NoAuth) {
+        dispatch(invalidRequest(AppRoute.Login));
+      }
+      return Promise.reject(error);
+    }
+  });

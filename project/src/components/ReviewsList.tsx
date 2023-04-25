@@ -6,9 +6,13 @@ type ReviewListProps = {
 }
 
 function ReviewsList ({comments}: ReviewListProps): JSX.Element {
+
+  const reversedComments = [...comments].reverse().slice(0, 10);
+
+
   return (
     <ul className="reviews__list">
-      {comments.map((comment) => <ReviewItem key={comment.id} comment={comment} />)}
+      {reversedComments.map((comment) => <ReviewItem key={comment.id} comment={comment} />)}
     </ul>
   );
 

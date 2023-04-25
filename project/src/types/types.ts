@@ -8,6 +8,7 @@ export type User = {
 	token: string;
 	email: string;
 }
+
 // Шаблон предложения аренды
 export type protoOffer = {
 	id: number;
@@ -53,6 +54,7 @@ export type Comment = {
 	user: User;
 }
 
+export type favorireStatus = Pick <protoOffer, 'id' | 'isFavorite'>
 export type userAuth = Pick<User, 'email'> & {password: string};
 export type commentAuth = Pick<Comment, 'comment' | 'rating'> & Pick<protoOffer, 'id'>
 export type Sorting = keyof typeof SortName;

@@ -1,12 +1,21 @@
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
-//import {filterOffers} from '../utils/util';
 import { useAppSelector } from '../hooks';
-import { getOffers } from '../store/data-process/data-selector';
+import { getFavorite, getIsFavoritesLoading } from '../store/data-process/data-selector';
+import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
+import { City } from '../types/types';
+import Spinner from '../components/Spinner';
 
 function Favorites (): JSX.Element {
-  const offers = useAppSelector(getOffers);
-  const favoriteOffers = offers.filter((offer) => offer.isFavorite);
+
+  const favoritesOffers = useAppSelector(getFavorite);
+  const sortOffersToContainers = (city: City['name']) => favoritesOffers.filter((el) => el.city.name === city);
+  const currentContainers = new Set(favoritesOffers.map((el) => el.city.name));
+  const isFavoritesLoading = useAppSelector(getIsFavoritesLoading);
+
+  if (isFavoritesLoading) {
+    return <Spinner/>;
+  }
 
   return (
     <>
@@ -15,7 +24,7 @@ function Favorites (): JSX.Element {
       </Helmet>
       <main className="page__main page__main--favorites">
         <div className="page__favorites-container container">
-          {favoriteOffers.length <= 0 ?
+          {favoritesOffers.length <= 0 ?
             <section className="favorites favorites--empty">
               <h1 className="visually-hidden">Favorites (empty)</h1>
               <div className="favorites__status-wrapper">
@@ -27,14 +36,14 @@ function Favorites (): JSX.Element {
             <section className="favorites">
               <h1 className="favorites__title">Saved listing</h1>
               <ul className="favorites__list">
-                {/*                 {
-                  currentLocation.map((el) => (
+                {
+                  Array.from(currentContainers).map((el) => (
                     <FavoritesLocationContainer
                       key={el}
-                      offers={filterOffers(favoriteOffers, CurrentOfferKey.City, el )}
+                      offers={sortOffersToContainers(el)}
                       city={el}
                     />))
-                } */}
+                }
               </ul>
             </section>}
         </div>
