@@ -1,15 +1,21 @@
 import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../hooks';
-import { getFavorite } from '../store/data-process/data-selector';
+import { getFavorite, getIsFavoritesLoading } from '../store/data-process/data-selector';
 import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
 import { City } from '../types/types';
+import Spinner from '../components/Spinner';
 
 function Favorites (): JSX.Element {
 
   const favoritesOffers = useAppSelector(getFavorite);
   const sortOffersToContainers = (city: City['name']) => favoritesOffers.filter((el) => el.city.name === city);
   const currentContainers = new Set(favoritesOffers.map((el) => el.city.name));
+  const isFavoritesLoading = useAppSelector(getIsFavoritesLoading);
+
+  if (isFavoritesLoading) {
+    return <Spinner/>;
+  }
 
   return (
     <>
