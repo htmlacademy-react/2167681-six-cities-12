@@ -1,4 +1,4 @@
-import { cities } from '../utils/consts';
+import { AppRoute, CallPlace, cities } from '../utils/consts';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { setCity } from '../store/site-process/site-silecer';
 import { City } from '../types/types';
@@ -9,9 +9,10 @@ import { Link } from 'react-router-dom';
 
 type LocationProps = {
 	city: string;
+  place: CallPlace;
 }
 
-function LocationItem ({city}: LocationProps): JSX.Element {
+function LocationItem ({city, place}: LocationProps): JSX.Element {
   const dispatch = useAppDispatch();
   const activeCity = useAppSelector(getCity);
 
@@ -21,10 +22,9 @@ function LocationItem ({city}: LocationProps): JSX.Element {
 
     return dispatch(setCity(x));}, [dispatch, city]);
 
-
   return (
     <li className="locations__item">
-      <Link to='#'className={`locations__item-link tabs__item ${activeCity.name === city ? 'tabs__item--active' : '' }`} onClick={() => handleCurrentCity()}>
+      <Link to={place === CallPlace.Login ? AppRoute.Main : '#'}className={`locations__item-link tabs__item ${activeCity.name === city ? 'tabs__item--active' : '' }`} onClick={() => handleCurrentCity()}>
         <span>{city}</span>
       </Link>
     </li>

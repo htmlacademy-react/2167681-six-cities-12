@@ -1,5 +1,5 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { StoreSliceName } from '../../utils/consts';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { PendingStatus, StoreSliceName } from '../../utils/consts';
 import { DataStore } from '../../types/state';
 import { fetchOffer, fetchOfferComments, fetchNearbyOffers, fetchOffers, fetchFavoriteOffers, postCommet, postFavoriteOffer } from '../action';
 
@@ -12,13 +12,18 @@ const initialState: DataStore = {
   comments: [],
   isOfferLoading: false,
   isFavoritesLoading: false,
-  favorites: []
+  favorites: [],
+  isCommentPending: PendingStatus.Inactive
 };
 
-const dataSlicer = createSlice({
+export const dataSlicer = createSlice({
   name: StoreSliceName.DataProcess,
   initialState,
-  reducers:{},
+  reducers:{
+    setIsCommentPending: (state, action: PayloadAction<PendingStatus>) => {
+      state.isCommentPending = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       // массив предложениий
@@ -53,6 +58,13 @@ const dataSlicer = createSlice({
       })
       .addCase(postCommet.fulfilled, (state, action) => {
         state.comments = action.payload;
+        state.isCommentPending = PendingStatus.Fulfilled;
+      })
+      .addCase(postCommet.pending, (state) => {
+        state.isCommentPending = PendingStatus.Loading;
+      })
+      .addCase(postCommet.rejected, (state) => {
+        state.isCommentPending = PendingStatus.Error;
       })
       // "избранное"
       .addCase(fetchFavoriteOffers.fulfilled, (state, action) => {
@@ -83,4 +95,4 @@ const dataSlicer = createSlice({
   }
 });
 
-export {dataSlicer};
+export const {setIsCommentPending} = dataSlicer.actions;

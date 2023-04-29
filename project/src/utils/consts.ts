@@ -1,9 +1,14 @@
-
 import { protoOffer, City } from '../types/types';
 import { Sorting } from '../types/types';
 export const MAX_PERCENT_STARS_WIDTH = 100;
 export const STARS_COUNT = 5;
 
+export enum PendingStatus {
+  Loading = 'loading',
+  Error = 'error',
+  Inactive = 'inactive',
+  Fulfilled = 'fulfilled',
+}
 
 export const sortingMethods: {
 	[key in Sorting]: (a: protoOffer, b: protoOffer) => number
@@ -11,20 +16,8 @@ export const sortingMethods: {
   Popular: () => 0,
   PriceIncrease: (a, b) => a.price - b.price,
   DecreasingPrice: (a, b) => b.price - a.price,
-  TopRatedFirst: (a, b) => a.rating - b.rating,
+  TopRatedFirst: (a, b) => b.rating - a.rating,
 };
-
-export const BookMarkTypeParams = {
-  offerId: {
-    width: 31,
-    height: 33
-  },
-  thumbnails: {
-    width: 18,
-    height: 19
-  }
-};
-
 
 export enum ApiRoutes {
 	Offers = '/hotels',
@@ -53,7 +46,7 @@ export enum AppRoute {
 	Main = '/',
 	Login = '/login',
 	Favorites = '/favorites',
-	Offer = '/offers/:id',
+	Offer = '/offer/:id',
 	NotFound = '/404'
 }
 
@@ -106,13 +99,6 @@ export enum CurrentOfferKey {
 	Rating = 'rating',
 }
 
-export const NEW_CITY = {
-  title: 'Нью-Йорк',
-  lat: 40.835292,
-  lng: -73.916236,
-  zoom: 10,
-};
-
 export const URL_MARKER_DEFAULT =
 	'https://assets.htmlacademy.ru/content/intensive/javascript-1/demo/interactive-map/pin.svg';
 
@@ -125,6 +111,11 @@ export enum ApiMethods {
 	PUT = 'PUT',
 	DELETE = 'DELETE',
 
+}
+
+export enum CallPlace {
+  Login = 'LoginPage',
+  Main = 'MainPage'
 }
 
 export enum StoreSliceName {

@@ -1,7 +1,7 @@
-import FoundOffers from '../components/FoundOffers';
-import LocationItem from '../components/LocationItem';
+import FoundOffers from '../components/Found-offers';
+import LocationItem from '../components/Location-item';
 import { Helmet } from 'react-helmet-async';
-import { cities } from '../utils/consts';
+import { CallPlace, cities } from '../utils/consts';
 
 function MainPage(): JSX.Element {
 
@@ -15,7 +15,7 @@ function MainPage(): JSX.Element {
         <div className="tabs">
           <section className="locations container">
             <ul className="locations__list tabs__list">
-              {cities.map((el) => <LocationItem key={el.name} city={el.name}/>)}
+              {cities.map((el) => <LocationItem key={el.name} city={el.name} place={CallPlace.Main}/>)}
             </ul>
           </section>
         </div>

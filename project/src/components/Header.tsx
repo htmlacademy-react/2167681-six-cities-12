@@ -4,9 +4,9 @@ import { AuthorizationStatus } from '../utils/consts';
 import { Link } from 'react-router-dom';
 import { AppRoute } from '../utils/consts';
 import { getUserStatus, getUser} from '../store/user-process/user-selector';
-import LogoLink from './LogoLink';
+import LogoLink from './Logo-link';
 import { getFavorite } from '../store/data-process/data-selector';
-import { fetchUserStatus } from '../store/action';
+import { fetchUserStatus, redirectTo } from '../store/action';
 import { logout } from '../store/user-process/user-slicer';
 
 function Header (): JSX.Element {
@@ -20,6 +20,7 @@ function Header (): JSX.Element {
     if (isAuth === AuthorizationStatus.Auth) {
       dispatch(logout());
       dispatch(fetchUserStatus);
+      dispatch(redirectTo(AppRoute.Main));
     }
   };
 

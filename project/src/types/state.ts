@@ -1,6 +1,6 @@
 import { store } from '../store';
 import { City, protoOffer, Sorting, User, Comment} from './types';
-import { AuthorizationStatus } from '../utils/consts';
+import { AuthorizationStatus, PendingStatus } from '../utils/consts';
 
 export type State = ReturnType <typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
@@ -14,6 +14,7 @@ export type DataStore = {
 	comments: Comment[];
 	isFavoritesLoading: boolean;
 	favorites: protoOffer[];
+	isCommentPending: PendingStatus;
  }
 
 export type UserStore = {

@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { protoOffer} from '../types/types';
 import { AppRoute, MAX_PERCENT_STARS_WIDTH, OfferPhotoSize, STARS_COUNT, OfferCardClassName } from '../utils/consts';
 import { Link } from 'react-router-dom';
-import BookMarkButton from './BookmarkButton';
+import BookMarkButton from './Bookmark-button';
 
 
 type offerProps = {
