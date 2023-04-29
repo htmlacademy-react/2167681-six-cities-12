@@ -1,6 +1,6 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
-import CommentForm from '../components/CommentForm';
-import ReviewsList from '../components/ReviewsList';
+import CommentForm from '../components/Comment-form';
+import ReviewsList from '../components/Reviews-list';
 import Map from '../components/Map';
 import { MapClassName, OfferCardClassName } from '../utils/consts';
 import Offer from '../components/Offer';
@@ -11,9 +11,10 @@ import { fetchNearbyOffers, fetchOffer, fetchOfferComments, postCommet} from '..
 import { useEffect} from 'react';
 import Spinner from '../components/Spinner';
 import { commentAuth} from '../types/types';
-import { getOffer, getIsOfferLoading, getNearbyOffers, getComments } from '../store/data-process/data-selector';
+import { getOffer, getIsOfferLoading, getNearbyOffers, getComments, getIsCommentPending } from '../store/data-process/data-selector';
 import { getUserStatus } from '../store/user-process/user-selector';
-import BookMarkButton from '../components/BookmarkButton';
+import BookMarkButton from '../components/Bookmark-button';
+import PopupError from '../components/popup-error/Popup-error';
 
 function OfferId (): JSX.Element |null {
   const params = useParams();
@@ -23,19 +24,8 @@ function OfferId (): JSX.Element |null {
   const nearbyOffers = useAppSelector(getNearbyOffers);
   const comments = useAppSelector(getComments);
   const authorizationStatus = useAppSelector(getUserStatus);
-  /*   const [scroll, setScroll] = useState(0);
+  const isPendingComment = useAppSelector(getIsCommentPending);
 
-  const handleScroll = () => setScroll(window.scrollY);
-
-  const handleSaveScroll = () => window.scrollTo(0, scroll);
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
- */
   useEffect(() => {
     const {id} = params;
 
@@ -63,7 +53,9 @@ function OfferId (): JSX.Element |null {
   locations.push({id, ...location});
 
   const onFormSubmit = (formData: Omit<commentAuth, 'id'>) => {
+
     dispatch(postCommet({id, ...formData}));
+
   };
 
   const favoriteData = {
@@ -73,7 +65,7 @@ function OfferId (): JSX.Element |null {
 
   return (
     <div>
-      <main className="page__main page__main--property">
+      <main className="page__main page__main--property  page__main--main">
         <section className="property">
           <div className="property__gallery-container container">
             <div className="property__gallery">
@@ -158,7 +150,7 @@ function OfferId (): JSX.Element |null {
                 <h2 className="reviews__title">Reviews &middot; <span className="reviews__amount">{comments.length}</span></h2>
                 {/* Место для формы отправки коммментариев */}
                 { authorizationStatus === AuthorizationStatus.Auth &&
-						<CommentForm onSubmit={onFormSubmit}/>}
+						<CommentForm onSubmit={onFormSubmit} pendingCommentStatus={isPendingComment}/>}
               </section>
             </div>
           </div>
@@ -175,6 +167,7 @@ function OfferId (): JSX.Element |null {
           </section>
         </div>
       </main>
+      <PopupError pendingStatus={isPendingComment}/>
     </div>
   );
 }

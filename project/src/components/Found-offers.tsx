@@ -2,7 +2,7 @@ import Offer from './Offer';
 import { MapClassName, OfferCardClassName} from '../utils/consts';
 import Map from './Map';
 import { useAppSelector} from '../hooks';
-import PlacesSorts from './placesSorts';
+import PlacesSorts from './places-sorts';
 import { useState, useMemo} from 'react';
 import { offerSelector } from '../store/data-process/data-selector';
 import { getCity,} from '../store/site-process/site-selector';

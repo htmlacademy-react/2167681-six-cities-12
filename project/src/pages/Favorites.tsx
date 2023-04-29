@@ -2,7 +2,7 @@ import Footer from '../components/Footer';
 import { Helmet } from 'react-helmet-async';
 import { useAppSelector } from '../hooks';
 import { getFavorite, getIsFavoritesLoading } from '../store/data-process/data-selector';
-import FavoritesLocationContainer from '../components/FavoritesLocationContainer';
+import FavoritesLocationContainer from '../components/Favorites-location-container';
 import { City } from '../types/types';
 import Spinner from '../components/Spinner';
 

@@ -4,7 +4,7 @@ import { SortName } from '../utils/consts';
 import { useState} from 'react';
 import { setSort } from '../store/site-process/site-silecer';
 import { getSort } from '../store/site-process/site-selector';
-import SortItem from './SortItem';
+import SortItem from './Sort-item';
 
 function PlacesSorts(): JSX.Element {
   const currentSort = useAppSelector(getSort);

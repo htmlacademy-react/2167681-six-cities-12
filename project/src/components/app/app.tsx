@@ -1,18 +1,20 @@
 import MainPage from '../../pages/Main';
 import Favorites from '../../pages/Favorites';
 import Header from '../Header';
-import PrivateRoute from '../privateRoute';
+import PrivateRoute from '../private-route';
 import Login from '../../pages/Login';
-import { BrowserRouter, Routes, Route} from 'react-router-dom';
-import NotFound from '../NotFound';
+import { Routes, Route} from 'react-router-dom';
+import NotFound from '../Not-found';
 import { AppRoute } from '../../utils/consts';
 import { HelmetProvider } from 'react-helmet-async';
-import OfferId from '../../pages/OfferId';
+import OfferId from '../../pages/Offer-id';
+import HistoryRouter from '../History-router';
+import browserHistory from '../../browser-history';
 
 function App(): JSX.Element {
   return (
     <HelmetProvider>
-      <BrowserRouter>
+      <HistoryRouter history={browserHistory}>
         <Routes>
           <Route path={AppRoute.Main} element={<Header />}>
             <Route index element={<MainPage />}/>
@@ -28,7 +30,7 @@ function App(): JSX.Element {
             <Route path={'/*'} element={<NotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HistoryRouter>
     </HelmetProvider>
   );
 }

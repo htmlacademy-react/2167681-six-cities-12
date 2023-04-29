@@ -6,7 +6,7 @@ import { dropToken } from '../../services/token';
 
 const initialState: UserStore = {
   authorizationStatus: AuthorizationStatus.Unknown,
-  user: ''
+  user: '',
 };
 
 export const userSlicer = createSlice({
@@ -16,7 +16,6 @@ export const userSlicer = createSlice({
     logout: (state) => {
       state.authorizationStatus = AuthorizationStatus.NoAuth;
       state.user = '';
-
       dropToken();
     }
   },

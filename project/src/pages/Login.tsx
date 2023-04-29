@@ -4,16 +4,24 @@ import { useAppDispatch } from '../hooks';
 import { fetchUserLogin } from '../store/action';
 import { FormEvent} from 'react';
 import { userAuth } from '../types/types';
+import LocationItem from '../components/Location-item';
+import { CallPlace, cities } from '../utils/consts';
 
 function Login (): JSX.Element {
   const dispatch = useAppDispatch();
+
+  const handleRandomLocation = () => {
+    const allCities = cities.map((el) => el.name);
+    const currentCity = allCities[Math.floor(Math.random() * allCities.length)];
+    return currentCity;
+  };
 
   const handleFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = e.currentTarget;
     const formData = new FormData(form) as Iterable<[userAuth]>;
-    const data: userAuth = Object.fromEntries (formData); // Unsafe assignment of an `any` value.eslint@typescript-eslint/no-unsafe-assignment
-    dispatch(fetchUserLogin(data));
+    const data: userAuth = Object.fromEntries (formData);
+    dispatch(fetchUserLogin({email: data.email.toLowerCase(), password: data.password}));
   };
 
   return (
@@ -39,9 +47,7 @@ function Login (): JSX.Element {
           </section>
           <section className="locations locations--login locations--current">
             <div className="locations__item">
-              <a className="locations__item-link" href="#">
-                <span>Amsterdam</span>
-              </a>
+              <LocationItem city={handleRandomLocation()} place={CallPlace.Login}/>
             </div>
           </section>
         </div>

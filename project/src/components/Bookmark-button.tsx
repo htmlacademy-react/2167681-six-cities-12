@@ -1,5 +1,5 @@
 import { useAppDispatch } from '../hooks';
-import { postFavoriteOffer } from '../store/action';
+import { fetchUserStatus, postFavoriteOffer } from '../store/action';
 import type { favorireStatus } from '../types/types';
 
 type BookMarkButtonProps = {
@@ -12,6 +12,7 @@ function BookMarkButton ({type, changeStatus}: BookMarkButtonProps):JSX.Element 
 
 
   const handleChangeStatus = () =>{
+    dispatch(fetchUserStatus);
     dispatch(postFavoriteOffer(changeStatus));
   };
 

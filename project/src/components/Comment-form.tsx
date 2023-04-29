@@ -1,17 +1,18 @@
-import { useState, ChangeEvent, Fragment } from 'react';
-import { STARS_COUNT } from '../utils/consts';
+import { useState, ChangeEvent, Fragment, useEffect } from 'react';
+import { PendingStatus, STARS_COUNT } from '../utils/consts';
 import { FormEvent } from 'react';
 import { commentAuth } from '../types/types';
 
  type FormProps = {
 	onSubmit: (formData: Omit<commentAuth, 'id'>) => void;
+  pendingCommentStatus: PendingStatus;
  }
 
-function CommentForm({onSubmit}: FormProps): JSX.Element {
+function CommentForm({onSubmit, pendingCommentStatus}: FormProps): JSX.Element {
   const [comment, setComment] = useState<string>('');
   const [rating, setRating] = useState<number>(0);
 
-  const onSubmitDisabled = () => !!((comment.length < 50 || comment.length > 300) || rating === 0);
+  const onSubmitDisabled = () => !!((comment.length < 50 || comment.length > 300) || rating === 0 || pendingCommentStatus === PendingStatus.Loading );
 
   const handleTextareaChange = (evt: ChangeEvent<HTMLTextAreaElement>) => {
     setComment(evt.target.value);
@@ -29,9 +30,15 @@ function CommentForm({onSubmit}: FormProps): JSX.Element {
       rating,
     });
 
-    setComment('');
-    setRating(0);
   };
+
+  useEffect(() => {
+    if (pendingCommentStatus === PendingStatus.Fulfilled) {
+      setComment('');
+      setRating(0);
+    }
+  }, [pendingCommentStatus]);
+
 
   return (
     <form className="reviews__form form" action="#" method="post" onSubmit={handleFormSubmit}>

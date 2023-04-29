@@ -46,7 +46,7 @@ export const fetchOffer = createAsyncThunk<protoOffer, protoOffer['id'], {extra:
       const axiosError = err as AxiosError;
 
       if(axiosError.response?.status === ResponseCode.NotFound) {
-        dispatch(invalidRequest(AppRoute.NotFound));
+        dispatch(invalidRequest(AppRoute.Login));
       }
       return Promise.reject(axiosError);
     }
