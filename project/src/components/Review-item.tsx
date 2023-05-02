@@ -7,6 +7,7 @@ type propsComment = {
 }
 
 function ReviewItem({comment}: propsComment): JSX.Element {
+
   return (
     <li className="reviews__item">
       <div className="reviews__user user">

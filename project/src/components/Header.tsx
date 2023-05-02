@@ -15,7 +15,6 @@ function Header (): JSX.Element {
   const userEmail = useAppSelector(getUser);
   const favoriteOffers = useAppSelector(getFavorite);
 
-
   const handleLogoutClick = () => {
     if (isAuth === AuthorizationStatus.Auth) {
       dispatch(logout());

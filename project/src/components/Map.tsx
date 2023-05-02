@@ -3,7 +3,7 @@ import 'leaflet/dist/leaflet.css';
 import {useRef, useEffect} from 'react';
 import {Location, City} from '../types/types';
 import { URL_MARKER_DEFAULT, MapClassName, URL_MARKER_CURRENT } from '../utils/consts';
-import useMap from '../hooks/use-map';
+import useMap from '../hooks/useMap';
 
 type MapProps = {
 	city: City;
