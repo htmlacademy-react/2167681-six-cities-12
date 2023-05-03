@@ -22,10 +22,10 @@ export const userSlicer = createSlice({
   extraReducers(builder) {
     builder
       .addCase(fetchUserStatus.fulfilled, (state, action) => {
-        state.user = action.payload.email;
+        state.user = action.payload;
         state.authorizationStatus = AuthorizationStatus.Auth;
       })
-      .addCase(fetchUserStatus.rejected, (state, action) => {
+      .addCase(fetchUserStatus.rejected, (state) => {
         state.authorizationStatus = AuthorizationStatus.NoAuth;
       })
       .addCase(fetchUserLogin.fulfilled, (state, action) => {

@@ -81,13 +81,13 @@ export const postCommet = createAsyncThunk<Comment[], commentAuth, {extra: Extra
   });
 
 // запросы аторизации
-export const fetchUserStatus = createAsyncThunk<User, undefined, {extra: Extra}>(
+export const fetchUserStatus = createAsyncThunk<userAuth['email'], undefined, {extra: Extra}>(
   Action.FETCH_USER_STATUS,
   async (_, {extra}) => {
     const { api } = extra;
     const {data} = await api.get<User>(ApiRoutes.Login);
 
-    return data;
+    return data.email;
   });
 
 export const fetchUserLogin = createAsyncThunk<userAuth['email'], userAuth, {
