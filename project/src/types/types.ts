@@ -8,6 +8,7 @@ export type User = {
 	token: string;
 	email: string;
 }
+export type TimeOut = ReturnType<typeof setTimeout>
 
 // Шаблон предложения аренды
 export type protoOffer = {

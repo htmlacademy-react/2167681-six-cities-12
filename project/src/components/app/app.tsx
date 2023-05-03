@@ -1,7 +1,7 @@
 import MainPage from '../../pages/Main';
 import Favorites from '../../pages/Favorites';
 import Header from '../Header';
-import PrivateRoute from '../private-route';
+import PrivateRoute from '../Private-route';
 import Login from '../../pages/Login';
 import { Routes, Route} from 'react-router-dom';
 import NotFound from '../Not-found';
